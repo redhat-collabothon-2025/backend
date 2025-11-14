@@ -158,6 +158,10 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'API',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'ENUM_NAME_OVERRIDES': {
+        'RiskLevelEnum': 'whitehat_app.models.User.RISK_LEVELS',
+        'SeverityEnum': 'whitehat_app.models.Incident.SEVERITY_CHOICES',
+    },
 }
 
 AUTH_USER_MODEL = 'whitehat_app.User'

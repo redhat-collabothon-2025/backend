@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f2ef;
+        }
+        .email-wrapper {
+            background-color: #f3f2ef;
+            padding: 20px 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+        }
+        .header {
+            background-color: #0a66c2;
+            padding: 24px 32px;
+            border-radius: 8px 8px 0 0;
+        }
+        .linkedin-logo {
+            display: inline-block;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .content {
+            padding: 32px;
+        }
+        .notification-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #0a66c2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: white;
+            font-size: 24px;
+        }
+        h2 {
+            color: #000000;
+            font-size: 24px;
+            font-weight: 400;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+        .subtitle {
+            color: #666666;
+            font-size: 16px;
+            text-align: center;
+            margin: 0 0 24px 0;
+        }
+        .profile-section {
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 24px 0;
+            border: 1px solid #e0e0e0;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .profile-image {
+            width: 56px;
+            height: 56px;
+            background-color: #d3d3d3;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 24px;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-name {
+            font-weight: 600;
+            color: #000000;
+            margin: 0 0 4px 0;
+        }
+        .profile-title {
+            color: #666666;
+            font-size: 14px;
+            margin: 0;
+        }
+        .message-preview {
+            background-color: white;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #0a66c2;
+            margin-top: 12px;
+        }
+        .message-text {
+            color: #000000;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: 24px auto;
+            background-color: #0a66c2;
+            color: white;
+            text-align: center;
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .cta-button:hover {
+            background-color: #004182;
+        }
+        .secondary-button {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: 16px auto;
+            background-color: white;
+            color: #0a66c2;
+            text-align: center;
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: 1px solid #0a66c2;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 32px 0;
+        }
+        .footer {
+            padding: 24px 32px;
+            background-color: #f9fafb;
+            border-radius: 0 0 8px 8px;
+        }
+        .footer-text {
+            color: #666666;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 0 0 8px 0;
+        }
+        .footer-links {
+            margin-top: 16px;
+        }
+        .footer-link {
+            color: #0a66c2;
+            text-decoration: none;
+            font-size: 12px;
+            margin-right: 16px;
+        }
+        .unsubscribe {
+            color: #666666;
+            font-size: 11px;
+            margin-top: 16px;
+        }
+        .unsubscribe a {
+            color: #0a66c2;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <div class="header">
+                <a href="#" class="linkedin-logo">LinkedIn</a>
+            </div>
+
+            <div class="content">
+                <div class="notification-icon">👤</div>
+                <h2>{{ notification_count }} people viewed your profile</h2>
+                <p class="subtitle">See who's been checking out your LinkedIn profile</p>
+
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="profile-image">{{ viewer_initials }}</div>
+                        <div class="profile-info">
+                            <p class="profile-name">{{ viewer_name }}</p>
+                            <p class="profile-title">{{ viewer_title }} at {{ viewer_company }}</p>
+                        </div>
+                    </div>
+                    <div class="message-preview">
+                        <p class="message-text">
+                            "Hi {{ user_name }}, I came across your profile and was impressed by your experience in {{ user_field }}. I'd love to connect and discuss potential opportunities at {{ viewer_company }}."
+                        </p>
+                    </div>
+                </div>
+
+                <a href="{{ phishing_link }}" class="cta-button">View Profile Visitors</a>
+                <a href="{{ phishing_link }}" class="secondary-button">Reply to Message</a>
+
+                <div class="divider"></div>
+
+                <p style="color: #666666; font-size: 14px; text-align: center; margin: 16px 0;">
+                    You have <strong>{{ pending_invitations }}</strong> pending invitations and <strong>{{ unread_messages }}</strong> unread messages waiting for you.
+                </p>
+            </div>
+
+            <div class="footer">
+                <p class="footer-text">
+                    This email was intended for {{ user_email }}. Learn why we included this.
+                </p>
+                <p class="footer-text">
+                    © {{ current_year }} LinkedIn Corporation, 1000 W. Maude Avenue, Sunnyvale, CA 94085. LinkedIn and the LinkedIn logo are registered trademarks of LinkedIn.
+                </p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Help Center</a>
+                    <a href="#" class="footer-link">Privacy & Terms</a>
+                    <a href="#" class="footer-link">Security</a>
+                </div>
+                <p class="unsubscribe">
+                    <a href="#">Unsubscribe</a> | <a href="#">Change email preferences</a>
+                </p>
+                <img src="{{ tracking_pixel_url }}" width="1" height="1" style="display: block;" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

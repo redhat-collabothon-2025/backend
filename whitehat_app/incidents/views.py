@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from whitehat_app.models import Incident, User
-from whitehat_app.serializers import IncidentSerializer
+from whitehat_app.serializers import IncidentSerializer, IncidentCreateSerializer, IncidentUpdateSerializer
 
 
 class IncidentViewSet(viewsets.ModelViewSet):
@@ -36,18 +36,7 @@ class IncidentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @extend_schema(
-        request={
-            'type': 'object',
-            'properties': {
-                'user_id': {'type': 'string', 'format': 'uuid'},
-                'incident_type': {'type': 'string'},
-                'severity': {
-                    'type': 'string',
-                    'enum': ['LOW', 'MEDIUM', 'CRITICAL']
-                }
-            },
-            'required': ['user_id', 'incident_type', 'severity']
-        },
+        request=IncidentCreateSerializer,
         responses={201: IncidentSerializer}
     )
     def create(self, request):
@@ -75,16 +64,7 @@ class IncidentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @extend_schema(
-        request={
-            'type': 'object',
-            'properties': {
-                'incident_type': {'type': 'string'},
-                'severity': {
-                    'type': 'string',
-                    'enum': ['LOW', 'MEDIUM', 'CRITICAL']
-                }
-            }
-        },
+        request=IncidentUpdateSerializer,
         responses={200: IncidentSerializer}
     )
     def partial_update(self, request, pk=None):

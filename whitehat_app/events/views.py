@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from whitehat_app.models import Event, User
-from whitehat_app.serializers import EventSerializer
+from whitehat_app.serializers import EventSerializer, EventCreateSerializer
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -39,18 +39,7 @@ class EventViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @extend_schema(
-        request={
-            'type': 'object',
-            'properties': {
-                'user_id': {'type': 'string', 'format': 'uuid'},
-                'event_type': {
-                    'type': 'string',
-                    'enum': ['phishing_click', 'bulk_export', 'usb_connect']
-                },
-                'event_data': {'type': 'object'}
-            },
-            'required': ['user_id', 'event_type', 'event_data']
-        },
+        request=EventCreateSerializer,
         responses={201: EventSerializer}
     )
     def create(self, request):

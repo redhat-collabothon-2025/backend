@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory
 
 
@@ -43,3 +44,67 @@ class RiskHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = RiskHistory
         fields = '__all__'
+
+
+class SendPhishingEmailSerializer(serializers.Serializer):
+    user_id = serializers.UUIDField()
+    campaign_id = serializers.UUIDField(required=False, allow_null=True)
+    template_type = serializers.ChoiceField(
+        choices=['linkedin', 'general'],
+        default='linkedin'
+    )
+    tracking_enabled = serializers.BooleanField(default=True)
+
+
+class BulkPhishingSerializer(serializers.Serializer):
+    user_ids = serializers.ListField(
+        child=serializers.UUIDField(),
+        allow_empty=False
+    )
+    campaign_id = serializers.UUIDField(required=False, allow_null=True)
+    template_type = serializers.ChoiceField(
+        choices=['linkedin', 'general'],
+        default='linkedin'
+    )
+
+
+class PhishingResponseSerializer(serializers.Serializer):
+    message = serializers.CharField()
+    tracking_id = serializers.UUIDField()
+
+
+class BulkPhishingResponseSerializer(serializers.Serializer):
+    message = serializers.CharField()
+    sent_count = serializers.IntegerField()
+    failed_count = serializers.IntegerField()
+
+
+class AddTargetsSerializer(serializers.Serializer):
+    user_ids = serializers.ListField(
+        child=serializers.UUIDField(),
+        allow_empty=False
+    )
+
+
+class EventCreateSerializer(serializers.Serializer):
+    user_id = serializers.UUIDField()
+    event_type = serializers.ChoiceField(
+        choices=['phishing_click', 'bulk_export', 'usb_connect']
+    )
+    event_data = serializers.JSONField()
+
+
+class IncidentCreateSerializer(serializers.Serializer):
+    user_id = serializers.UUIDField()
+    incident_type = serializers.CharField()
+    severity = serializers.ChoiceField(
+        choices=['LOW', 'MEDIUM', 'CRITICAL']
+    )
+
+
+class IncidentUpdateSerializer(serializers.Serializer):
+    incident_type = serializers.CharField(required=False)
+    severity = serializers.ChoiceField(
+        choices=['LOW', 'MEDIUM', 'CRITICAL'],
+        required=False
+    )

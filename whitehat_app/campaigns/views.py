@@ -7,7 +7,7 @@ from django.utils import timezone
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from whitehat_app.models import Campaign
-from whitehat_app.serializers import CampaignSerializer
+from whitehat_app.serializers import CampaignSerializer, AddTargetsSerializer
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
@@ -83,15 +83,7 @@ class CampaignViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @extend_schema(
-        request={
-            'type': 'object',
-            'properties': {
-                'user_ids': {
-                    'type': 'array',
-                    'items': {'type': 'string', 'format': 'uuid'}
-                }
-            }
-        },
+        request=AddTargetsSerializer,
         responses={200: {'type': 'object', 'properties': {'message': {'type': 'string'}}}}
     )
     @action(detail=True, methods=['post'], url_path='add-targets')
