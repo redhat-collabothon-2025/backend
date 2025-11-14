@@ -36,6 +36,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
+    "https://frontend-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -43,6 +44,8 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
+    "https://frontend-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com"
+
 ]
 # Application definition
 
