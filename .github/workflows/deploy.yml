@@ -1,0 +1,38 @@
+name: Deploy to OpenShift
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Install oc CLI
+        uses: redhat-actions/oc-installer@v1
+        with:
+          version: '4.12'
+      
+      - name: Login to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
+          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+          namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
+          insecure_skip_tls_verify: true
+      
+      - name: Trigger Build
+        run: |
+          oc start-build backend --follow --wait
+      
+      - name: Wait for Deployment
+        run: |
+          oc rollout status deployment/backend -w --timeout=5m
+      
+      - name: Verify Deployment
+        run: |
+          oc get pods -l app=backend
