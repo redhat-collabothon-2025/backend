@@ -1,12 +1,12 @@
+from drf_spectacular.utils import extend_schema, OpenApiExample
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from django.contrib.auth import authenticate
-from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
-from drf_spectacular.types import OpenApiTypes
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from whitehat_app.models import User
 from whitehat_app.serializers import UserSerializer, LoginSerializer, RefreshTokenSerializer
 
 
@@ -39,20 +39,20 @@ from whitehat_app.serializers import UserSerializer, LoginSerializer, RefreshTok
 def login(request):
     serializer = LoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    
+
     email = serializer.validated_data['email']
     password = serializer.validated_data['password']
-    
-    user = authenticate(username=email, password=password)
-    
-    if user is None:
+
+    user = User.objects.filter(email=email).first()
+
+    if user is None or not user.check_password(password):
         return Response(
             {'error': 'Invalid credentials'},
             status=status.HTTP_400_BAD_REQUEST
         )
-    
+
     refresh = RefreshToken.for_user(user)
-    
+
     return Response({
         'access': str(refresh.access_token),
         'refresh': str(refresh),
@@ -79,7 +79,7 @@ def login(request):
 def logout(request):
     serializer = RefreshTokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    
+
     try:
         refresh_token = serializer.validated_data['refresh']
         token = RefreshToken(refresh_token)
@@ -116,7 +116,7 @@ def logout(request):
 def refresh_token(request):
     serializer = RefreshTokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    
+
     try:
         refresh = RefreshToken(serializer.validated_data['refresh'])
         return Response({
