@@ -8,5 +8,6 @@ urlpatterns = [
     path('employees/', include('whitehat_app.employees.urls')),
     path('events/', include('whitehat_app.events.urls')),
     path('incidents/', include('whitehat_app.incidents.urls')),
+    path('risks/', include('whitehat_app.risks.urls')),
 
 ]

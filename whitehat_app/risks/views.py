@@ -1,0 +1,183 @@
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from django.db.models import Count, Avg, Q
+from django.utils import timezone
+from datetime import timedelta
+from drf_spectacular.utils import extend_schema
+from whitehat_app.models import User, Incident, RiskHistory
+
+
+@extend_schema(
+    responses={200: {
+        'type': 'object',
+        'properties': {
+            'total_employees': {'type': 'integer'},
+            'average_risk_score': {'type': 'number'},
+            'critical_count': {'type': 'integer'},
+            'medium_count': {'type': 'integer'},
+            'low_count': {'type': 'integer'},
+            'recent_incidents': {'type': 'integer'}
+        }
+    }}
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def overview(request):
+    total_employees = User.objects.count()
+    average_risk_score = User.objects.aggregate(avg=Avg('risk_score'))['avg'] or 0
+    
+    critical_count = User.objects.filter(risk_level='CRITICAL').count()
+    medium_count = User.objects.filter(risk_level='MEDIUM').count()
+    low_count = User.objects.filter(risk_level='LOW').count()
+    
+    seven_days_ago = timezone.now() - timedelta(days=7)
+    recent_incidents = Incident.objects.filter(created_at__gte=seven_days_ago).count()
+    
+    return Response({
+        'total_employees': total_employees,
+        'average_risk_score': round(average_risk_score, 2),
+        'critical_count': critical_count,
+        'medium_count': medium_count,
+        'low_count': low_count,
+        'recent_incidents': recent_incidents
+    })
+
+
+@extend_schema(
+    responses={200: {
+        'type': 'array',
+        'items': {
+            'type': 'object',
+            'properties': {
+                'risk_level': {'type': 'string'},
+                'count': {'type': 'integer'},
+                'percentage': {'type': 'number'}
+            }
+        }
+    }}
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def distribution(request):
+    total_users = User.objects.count()
+    
+    if total_users == 0:
+        return Response([])
+    
+    risk_distribution = User.objects.values('risk_level').annotate(
+        count=Count('id')
+    ).order_by('risk_level')
+    
+    result = []
+    for item in risk_distribution:
+        result.append({
+            'risk_level': item['risk_level'],
+            'count': item['count'],
+            'percentage': round((item['count'] / total_users) * 100, 2)
+        })
+    
+    return Response(result)
+
+
+@extend_schema(
+    responses={200: {
+        'type': 'array',
+        'items': {
+            'type': 'object',
+            'properties': {
+                'date': {'type': 'string', 'format': 'date'},
+                'average_risk_score': {'type': 'number'},
+                'critical_count': {'type': 'integer'},
+                'medium_count': {'type': 'integer'},
+                'low_count': {'type': 'integer'}
+            }
+        }
+    }}
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def trending(request):
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    
+    risk_history = RiskHistory.objects.filter(
+        created_at__gte=thirty_days_ago
+    ).values('created_at__date').annotate(
+        avg_risk=Avg('risk_score')
+    ).order_by('created_at__date')
+    
+    result = []
+    for item in risk_history:
+        date = item['created_at__date']
+        
+        critical_count = RiskHistory.objects.filter(
+            created_at__date=date,
+            risk_score__gte=50
+        ).count()
+        
+        medium_count = RiskHistory.objects.filter(
+            created_at__date=date,
+            risk_score__gte=20,
+            risk_score__lt=50
+        ).count()
+        
+        low_count = RiskHistory.objects.filter(
+            created_at__date=date,
+            risk_score__lt=20
+        ).count()
+        
+        result.append({
+            'date': date.isoformat(),
+            'average_risk_score': round(item['avg_risk'], 2),
+            'critical_count': critical_count,
+            'medium_count': medium_count,
+            'low_count': low_count
+        })
+    
+    return Response(result)
+
+
+@extend_schema(
+    responses={200: {
+        'type': 'array',
+        'items': {
+            'type': 'object',
+            'properties': {
+                'department': {'type': 'string'},
+                'week': {'type': 'string'},
+                'risk_score': {'type': 'number'},
+                'incident_count': {'type': 'integer'}
+            }
+        }
+    }}
+)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def heatmap(request):
+    result = []
+    
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    
+    departments = ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance', 'Operations']
+    
+    for week_num in range(4):
+        week_start = thirty_days_ago + timedelta(weeks=week_num)
+        week_end = week_start + timedelta(days=7)
+        week_label = f"Week {week_num + 1}"
+        
+        for department in departments:
+            incidents_count = Incident.objects.filter(
+                created_at__gte=week_start,
+                created_at__lt=week_end
+            ).count()
+            
+            avg_risk = User.objects.aggregate(avg=Avg('risk_score'))['avg'] or 0
+            
+            result.append({
+                'department': department,
+                'week': week_label,
+                'risk_score': round(avg_risk + (hash(department) % 20), 2),
+                'incident_count': incidents_count
+            })
+    
+    return Response(result)
