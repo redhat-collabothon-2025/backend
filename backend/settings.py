@@ -47,7 +47,7 @@ CSRF_TRUSTED_ORIGINS = [
     os.getenv('FRONTEND_URL', 'https://frontend-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
     
 ]
-# Application definition
+# Application definiti
 
 INSTALLED_APPS = [
     'django.contrib.admin',
