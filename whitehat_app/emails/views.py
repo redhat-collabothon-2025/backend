@@ -10,6 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory
+from whitehat_app.ai_service import ai_service
+from whitehat_app.tracking_logger import tracking_logger
 from ..serializers import (
     SendPhishingEmailSerializer,
     BulkPhishingSerializer,
@@ -85,32 +87,17 @@ def send_phishing_email(request):
     tracking_pixel_url = f"{base_url}/api/phishing/track/{tracking_id}"
 
     if template_type == 'linkedin':
+        # Generate viewer profile using AI
+        viewer_profile = ai_service.generate_profile_viewer()
+
         email_context = {
             'user_name': target_user.name.split()[0] if target_user.name else 'Professional',
             'user_email': target_user.email,
             'notification_count': random.randint(5, 23),
-            'viewer_initials': random.choice(['JM', 'RS', 'AK', 'TW', 'LB']),
-            'viewer_name': random.choice([
-                'James Mitchell',
-                'Rachel Stevens',
-                'Alex Kumar',
-                'Thomas Wilson',
-                'Lisa Brown'
-            ]),
-            'viewer_title': random.choice([
-                'Senior Recruiter',
-                'Talent Acquisition Manager',
-                'HR Director',
-                'Technical Recruiter',
-                'Hiring Manager'
-            ]),
-            'viewer_company': random.choice([
-                'Tech Solutions Inc',
-                'Global Innovations Corp',
-                'Future Systems Ltd',
-                'Digital Ventures Group',
-                'Cloud Technologies'
-            ]),
+            'viewer_name': viewer_profile['name'],
+            'viewer_initials': ''.join([n[0] for n in viewer_profile['name'].split()[:2]]),
+            'viewer_title': viewer_profile['title'],
+            'viewer_company': viewer_profile['company'],
             'user_field': random.choice([
                 'software development',
                 'data analysis',
@@ -127,6 +114,37 @@ def send_phishing_email(request):
 
         html_message = render_to_string('emails/linkedin_phishing.html', email_context)
         subject = f"👤 {email_context['notification_count']} people viewed your LinkedIn profile"
+    elif template_type == 'linkedin_message':
+        # Generate recruiter profile using AI
+        recruiter_profile = ai_service.generate_recruiter_profile()
+        user_first_name = target_user.name.split()[0] if target_user.name else 'there'
+
+        # Generate message using AI
+        message_preview = ai_service.generate_linkedin_message(
+            user_name=user_first_name,
+            sender_name=recruiter_profile['name'],
+            sender_company=recruiter_profile['company']
+        )
+
+        email_context = {
+            'user_name': target_user.name or 'Professional',
+            'user_email': target_user.email,
+            'sender_name': recruiter_profile['name'],
+            'sender_initials': ''.join([n[0] for n in recruiter_profile['name'].split()[:2]]),
+            'sender_title': recruiter_profile['title'],
+            'sender_company': recruiter_profile['company'],
+            'message_preview': message_preview,
+            'new_messages_count': random.randint(1, 3),
+            'unread_messages': random.randint(1, 5),
+            'pending_invitations': random.randint(2, 8),
+            'notification_count': random.randint(5, 15),
+            'phishing_link': phishing_link,
+            'tracking_pixel_url': tracking_pixel_url if tracking_enabled else '#',
+            'current_year': datetime.now().year
+        }
+
+        html_message = render_to_string('emails/linkedin_message_phishing.html', email_context)
+        subject = f"💬 You have {email_context['new_messages_count']} new message{'s' if email_context['new_messages_count'] > 1 else ''} from {recruiter_profile['name']}"
     else:
         email_context = {
             'company_name': 'Your Company',
@@ -203,46 +221,63 @@ def track_click(request, tracking_id):
             event_data__tracking_id=tracking_id
         ).first()
 
-        if event and not event.event_data.get('clicked', False):
-            # Mark as clicked
-            event.event_data['clicked'] = True
-            event.event_data['clicked_at'] = datetime.now().isoformat()
-            event.save()
+        if not event:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
-            template_type = event.event_data.get('template_type', 'unknown')
-
-            # Update user risk score for clicking phishing link (higher risk)
-            update_user_risk(
-                user=event.user,
-                risk_increase=25,
-                reason=f'Clicked on phishing link ({template_type} template)'
+        if event.event_data.get('clicked', False):
+            return Response(
+                status=status.HTTP_302_FOUND,
+                headers={'Location': '/phishing-awareness-training'}
             )
 
-            # Create security incident
-            severity = 'MEDIUM'
-            if event.user.risk_score >= 70:
-                severity = 'CRITICAL'
+        event.event_data['clicked'] = True
+        event.event_data['clicked_at'] = datetime.now().isoformat()
+        event.save()
 
-            Incident.objects.create(
-                user=event.user,
-                incident_type=f'Phishing Link Click - {template_type.title()}',
-                severity=severity
-            )
+        template_type = event.event_data.get('template_type', 'unknown')
 
-            # Update campaign stats
-            if 'campaign_id' in event.event_data and event.event_data['campaign_id']:
-                try:
-                    campaign = Campaign.objects.get(id=event.event_data['campaign_id'])
-                    campaign.click_count += 1
-                    campaign.save()
-                except Campaign.DoesNotExist:
-                    pass
+        update_user_risk(
+            user=event.user,
+            risk_increase=25,
+            reason=f'Clicked on phishing link ({template_type} template)'
+        )
+
+        severity = 'MEDIUM'
+        if event.user.risk_score >= 70:
+            severity = 'CRITICAL'
+
+        Incident.objects.create(
+            user=event.user,
+            incident_type=f'Phishing Link Click - {template_type.title()}',
+            severity=severity
+        )
+
+        campaign = None
+        campaign_name = None
+        if 'campaign_id' in event.event_data and event.event_data['campaign_id']:
+            try:
+                campaign = Campaign.objects.get(id=event.event_data['campaign_id'])
+                campaign.click_count += 1
+                campaign.save()
+                campaign_name = f"{campaign.persona_name} - {campaign.scenario}"
+            except Campaign.DoesNotExist:
+                pass
+
+        tracking_logger.log_link_click(
+            user_email=event.user.email,
+            campaign_id=event.event_data.get('campaign_id'),
+            campaign_name=campaign_name,
+            template_type=template_type,
+            tracking_id=tracking_id,
+            severity=severity
+        )
 
         return Response(
             status=status.HTTP_302_FOUND,
             headers={'Location': '/phishing-awareness-training'}
         )
-    except Exception:
+    except Exception as e:
+        print(f"[TRACK_CLICK] ERROR: {str(e)}")
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
@@ -261,17 +296,31 @@ def track_open(request, tracking_id):
         ).first()
 
         if event and not event.event_data.get('opened', False):
-            # Mark as opened
             event.event_data['opened'] = True
             event.event_data['opened_at'] = datetime.now().isoformat()
             event.save()
 
-            # Update user risk score for opening phishing email
             template_type = event.event_data.get('template_type', 'unknown')
             update_user_risk(
                 user=event.user,
                 risk_increase=5,
                 reason=f'Opened phishing email ({template_type} template)'
+            )
+
+            campaign_name = None
+            if 'campaign_id' in event.event_data and event.event_data['campaign_id']:
+                try:
+                    campaign = Campaign.objects.get(id=event.event_data['campaign_id'])
+                    campaign_name = f"{campaign.persona_name} - {campaign.scenario}"
+                except Campaign.DoesNotExist:
+                    pass
+
+            tracking_logger.log_email_open(
+                user_email=event.user.email,
+                campaign_id=event.event_data.get('campaign_id'),
+                campaign_name=campaign_name,
+                template_type=template_type,
+                tracking_id=tracking_id
             )
 
         pixel = b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02\x44\x01\x00\x3B'
@@ -331,32 +380,17 @@ def send_bulk_phishing(request):
 
             # Prepare email context based on template type
             if template_type == 'linkedin':
+                # Generate viewer profile using AI
+                viewer_profile = ai_service.generate_profile_viewer()
+
                 email_context = {
                     'user_name': target_user.name.split()[0] if target_user.name else 'Professional',
                     'user_email': target_user.email,
                     'notification_count': random.randint(5, 23),
-                    'viewer_initials': random.choice(['JM', 'RS', 'AK', 'TW', 'LB']),
-                    'viewer_name': random.choice([
-                        'James Mitchell',
-                        'Rachel Stevens',
-                        'Alex Kumar',
-                        'Thomas Wilson',
-                        'Lisa Brown'
-                    ]),
-                    'viewer_title': random.choice([
-                        'Senior Recruiter',
-                        'Talent Acquisition Manager',
-                        'HR Director',
-                        'Technical Recruiter',
-                        'Hiring Manager'
-                    ]),
-                    'viewer_company': random.choice([
-                        'Tech Solutions Inc',
-                        'Global Innovations Corp',
-                        'Future Systems Ltd',
-                        'Digital Ventures Group',
-                        'Cloud Technologies'
-                    ]),
+                    'viewer_name': viewer_profile['name'],
+                    'viewer_initials': ''.join([n[0] for n in viewer_profile['name'].split()[:2]]),
+                    'viewer_title': viewer_profile['title'],
+                    'viewer_company': viewer_profile['company'],
                     'user_field': random.choice([
                         'software development',
                         'data analysis',
@@ -372,6 +406,37 @@ def send_bulk_phishing(request):
                 }
                 html_message = render_to_string('emails/linkedin_phishing.html', email_context)
                 subject = f"👤 {email_context['notification_count']} people viewed your LinkedIn profile"
+            elif template_type == 'linkedin_message':
+                # Generate recruiter profile using AI
+                recruiter_profile = ai_service.generate_recruiter_profile()
+                user_first_name = target_user.name.split()[0] if target_user.name else 'there'
+
+                # Generate message using AI
+                message_preview = ai_service.generate_linkedin_message(
+                    user_name=user_first_name,
+                    sender_name=recruiter_profile['name'],
+                    sender_company=recruiter_profile['company']
+                )
+
+                email_context = {
+                    'user_name': target_user.name or 'Professional',
+                    'user_email': target_user.email,
+                    'sender_name': recruiter_profile['name'],
+                    'sender_initials': ''.join([n[0] for n in recruiter_profile['name'].split()[:2]]),
+                    'sender_title': recruiter_profile['title'],
+                    'sender_company': recruiter_profile['company'],
+                    'message_preview': message_preview,
+                    'new_messages_count': random.randint(1, 3),
+                    'unread_messages': random.randint(1, 5),
+                    'pending_invitations': random.randint(2, 8),
+                    'notification_count': random.randint(5, 15),
+                    'phishing_link': phishing_link,
+                    'tracking_pixel_url': tracking_pixel_url if tracking_enabled else '#',
+                    'current_year': datetime.now().year
+                }
+
+                html_message = render_to_string('emails/linkedin_message_phishing.html', email_context)
+                subject = f"💬 You have {email_context['new_messages_count']} new message{'s' if email_context['new_messages_count'] > 1 else ''} from {recruiter_profile['name']}"
             else:
                 email_context = {
                     'company_name': 'Your Company',

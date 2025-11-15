@@ -3,271 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3f2ef;
-        }
-        .email-wrapper {
-            background-color: #f3f2ef;
-            padding: 20px 0;
-        }
-        .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
-        }
-        .header {
-            background-color: #0a66c2;
-            padding: 24px 32px;
-            border-radius: 8px 8px 0 0;
-        }
-        .linkedin-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .linkedin-logo svg {
-            width: 34px;
-            height: 34px;
-        }
-        .content {
-            padding: 32px;
-        }
-        .notification-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 28px;
-            box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
-        }
-
-        .notification-icon svg {
-            width: 28px;
-            height: 28px;
-        }
-        h2 {
-            color: #000000;
-            font-size: 24px;
-            font-weight: 400;
-            margin: 0 0 8px 0;
-            text-align: center;
-        }
-        .subtitle {
-            color: #666666;
-            font-size: 16px;
-            text-align: center;
-            margin: 0 0 24px 0;
-        }
-        .profile-section {
-            background-color: #f9fafb;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 24px 0;
-            border: 1px solid #e0e0e0;
-        }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .profile-image {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            margin-right: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .profile-info {
-            flex: 1;
-        }
-        .profile-name {
-            font-weight: 600;
-            color: #000000;
-            margin: 0 0 4px 0;
-        }
-        .profile-title {
-            color: #666666;
-            font-size: 14px;
-            margin: 0;
-        }
-        .message-preview {
-            background-color: white;
-            padding: 12px;
-            border-radius: 4px;
-            border-left: 3px solid #0a66c2;
-            margin-top: 12px;
-        }
-        .message-text {
-            color: #000000;
-            font-size: 14px;
-            line-height: 1.5;
-            margin: 0;
-        }
-        .cta-button {
-            display: block;
-            width: 100%;
-            max-width: 280px;
-            margin: 24px auto;
-            background: linear-gradient(180deg, #0a66c2 0%, #004182 100%);
-            color: white;
-            text-align: center;
-            padding: 14px 28px;
-            border-radius: 24px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(10, 102, 194, 0.4);
-        }
-        .secondary-button {
-            display: block;
-            width: 100%;
-            max-width: 280px;
-            margin: 16px auto;
-            background-color: white;
-            color: #0a66c2;
-            text-align: center;
-            padding: 14px 28px;
-            border-radius: 24px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            border: 2px solid #0a66c2;
-            transition: all 0.2s;
-        }
-        .secondary-button:hover {
-            background-color: #f3f6f9;
-            border-color: #004182;
-            color: #004182;
-        }
-        .divider {
-            height: 1px;
-            background-color: #e0e0e0;
-            margin: 32px 0;
-        }
-        .footer {
-            padding: 24px 32px;
-            background-color: #f9fafb;
-            border-radius: 0 0 8px 8px;
-        }
-        .footer-text {
-            color: #666666;
-            font-size: 12px;
-            line-height: 1.5;
-            margin: 0 0 8px 0;
-        }
-        .footer-links {
-            margin-top: 16px;
-        }
-        .footer-link {
-            color: #0a66c2;
-            text-decoration: none;
-            font-size: 12px;
-            margin-right: 16px;
-        }
-        .unsubscribe {
-            color: #666666;
-            font-size: 11px;
-            margin-top: 16px;
-        }
-        .unsubscribe a {
-            color: #0a66c2;
-            text-decoration: none;
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LinkedIn</title>
 </head>
-<body>
-    <div class="email-wrapper">
-        <div class="email-container">
-            <div class="header">
-                <a href="#" class="linkedin-logo">
-                    <svg viewBox="0 0 34 34" fill="white" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="34" height="34" rx="4" fill="white"/>
-                        <path d="M28.6667 28.6667H23.8889V21.1111C23.8889 19.2778 23.8556 16.9222 21.3333 16.9222C18.7778 16.9222 18.3889 18.9111 18.3889 20.9778V28.6667H13.6111V12.7778H18.2222V14.9556H18.2889C18.9556 13.7 20.6222 12.3889 23.0889 12.3889C27.9333 12.3889 28.6667 15.5778 28.6667 19.7V28.6667ZM8.27778 10.6C6.83333 10.6 5.66667 9.42222 5.66667 8C5.66667 6.57778 6.83333 5.4 8.27778 5.4C9.72222 5.4 10.8889 6.57778 10.8889 8C10.8889 9.42222 9.72222 10.6 8.27778 10.6ZM10.6667 28.6667H5.88889V12.7778H10.6667V28.6667ZM31 0H3C1.34444 0 0 1.33333 0 2.97778V31.0222C0 32.6667 1.34444 34 3 34H31C32.6556 34 34 32.6667 34 31.0222V2.97778C34 1.33333 32.6556 0 31 0Z" fill="#0a66c2"/>
-                    </svg>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
+<body style="margin: 0; padding: 0; background-color: #f3f2ef; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', Arial, sans-serif;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f3f2ef;">
+        <tr>
+            <td style="padding: 40px 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-            <div class="content">
-                <div class="notification-icon">
-                    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"/>
-                    </svg>
-                </div>
-                <h2>{{ notification_count }} people viewed your profile</h2>
-                <p class="subtitle">See who's been checking out your LinkedIn profile</p>
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td style="padding: 16px 24px; background-color: #ffffff; border-bottom: 1px solid #e0e0e0;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td width="135" valign="middle">
+                                        <!-- LinkedIn Logo -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+                                                <td style="vertical-align: middle;">
+                                                    <div style="width: 34px; height: 34px; background-color: #0077b5; border-radius: 4px; display: inline-block; text-align: center; line-height: 34px;">
+                                                        <span style="color: #ffffff; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">in</span>
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 8px; vertical-align: middle;">
+                                                    <span style="font-size: 21px; font-weight: bold; color: #0077b5; font-family: Arial, sans-serif; letter-spacing: -0.5px;">Linked</span><span style="font-size: 21px; font-weight: bold; color: #0077b5; font-family: Arial, sans-serif;">in</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="right" valign="middle">
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">Home</a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">My Network</a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">Jobs</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
-                <div class="profile-section">
-                    <div class="profile-header">
-                        <div class="profile-image">{{ viewer_initials }}</div>
-                        <div class="profile-info">
-                            <p class="profile-name">{{ viewer_name }}</p>
-                            <p class="profile-title">{{ viewer_title }} at {{ viewer_company }}</p>
-                        </div>
-                    </div>
-                    <div class="message-preview">
-                        <p class="message-text">
-                            "Hi {{ user_name }}, I came across your profile and was impressed by your experience in {{ user_field }}. I'd love to connect and discuss potential opportunities at {{ viewer_company }}."
-                        </p>
-                    </div>
-                </div>
+                    <!-- Main Content -->
+                    <tr>
+                        <td style="padding: 32px 24px;">
 
-                <a href="{{ phishing_link }}" class="cta-button">View Profile Visitors</a>
-                <a href="{{ phishing_link }}" class="secondary-button">Reply to Message</a>
+                            <!-- Title -->
+                            <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 400; color: #000000; line-height: 1.3;">
+                                {{ notification_count }} people viewed your profile
+                            </h1>
+                            <p style="margin: 0 0 24px 0; font-size: 14px; color: #666666; line-height: 1.4;">
+                                See who's been checking out your profile this week
+                            </p>
 
-                <div class="divider"></div>
+                            <!-- Profile Viewer Card -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 24px;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="72" valign="top">
+                                                    <!-- Avatar Circle -->
+                                                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%); display: flex; align-items: center; justify-content: center;">
+                                                        <span style="font-size: 24px; font-weight: 600; color: #ffffff; line-height: 64px; text-align: center; display: block;">{{ viewer_initials }}</span>
+                                                    </div>
+                                                </td>
+                                                <td valign="top" style="padding-left: 16px;">
+                                                    <div style="margin-bottom: 4px;">
+                                                        <a href="{{ phishing_link }}" style="font-size: 16px; font-weight: 600; color: #0077b5; text-decoration: none; line-height: 1.4;">{{ viewer_name }}</a>
+                                                    </div>
+                                                    <div style="font-size: 14px; color: #666666; line-height: 1.4; margin-bottom: 2px;">
+                                                        {{ viewer_title }}
+                                                    </div>
+                                                    <div style="font-size: 14px; color: #666666; line-height: 1.4;">
+                                                        {{ viewer_company }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
 
-                <p style="color: #666666; font-size: 14px; text-align: center; margin: 16px 0;">
-                    You have <strong>{{ pending_invitations }}</strong> pending invitations and <strong>{{ unread_messages }}</strong> unread messages waiting for you.
-                </p>
-            </div>
+                            <!-- CTA Button -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td align="center" style="padding: 8px 0 24px 0;">
+                                        <a href="{{ phishing_link }}" style="display: inline-block; padding: 12px 24px; background-color: #0077b5; color: #ffffff; text-decoration: none; border-radius: 24px; font-size: 16px; font-weight: 600; text-align: center; min-width: 200px;">
+                                            See all viewers
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
 
-            <div class="footer">
-                <p class="footer-text">
-                    This email was intended for {{ user_email }}. Learn why we included this.
-                </p>
-                <p class="footer-text">
-                    © {{ current_year }} LinkedIn Corporation, 1000 W. Maude Avenue, Sunnyvale, CA 94085. LinkedIn and the LinkedIn logo are registered trademarks of LinkedIn.
-                </p>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Help Center</a>
-                    <a href="#" class="footer-link">Privacy & Terms</a>
-                    <a href="#" class="footer-link">Security</a>
-                </div>
-                <p class="unsubscribe">
-                    <a href="#">Unsubscribe</a> | <a href="#">Change email preferences</a>
-                </p>
-                <img src="{{ tracking_pixel_url }}" width="1" height="1" style="display: none; visibility: hidden;" alt="" />
-            </div>
-        </div>
-    </div>
+                            <!-- Divider -->
+                            <div style="border-top: 1px solid #e0e0e0; margin: 24px 0;"></div>
+
+                            <!-- Stats -->
+                            <p style="margin: 0; font-size: 14px; color: #666666; text-align: center; line-height: 1.6;">
+                                You have <strong style="color: #000000;">{{ pending_invitations }}</strong> pending connection invitations<br>
+                                <strong style="color: #000000;">{{ unread_messages }}</strong> unread messages waiting for you
+                            </p>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 24px; background-color: #f9fafb; border-top: 1px solid #e0e0e0;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="font-size: 12px; color: #666666; line-height: 1.6;">
+                                        <p style="margin: 0 0 12px 0;">
+                                            This email was intended for {{ user_name }} ({{ user_email }}).
+                                        </p>
+                                        <p style="margin: 0 0 16px 0;">
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Learn why we included this</a> ·
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Unsubscribe</a> ·
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Help</a>
+                                        </p>
+                                        <p style="margin: 0; color: #999999; font-size: 11px;">
+                                            © {{ current_year }} LinkedIn Corporation, 1000 W Maude Avenue, Sunnyvale, CA 94085
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Tracking Pixel -->
+    <img src="{{ tracking_pixel_url }}" width="1" height="1" alt="" style="display: none; visibility: hidden;">
+
 </body>
 </html>

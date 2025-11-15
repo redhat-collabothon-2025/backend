@@ -45,7 +45,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
     os.getenv('FRONTEND_URL', 'http://frontend-white-hat-project.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
-    
+
 ]
 # Application definition-
 
@@ -176,3 +176,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 EMAIL_USE_SSL = False
+
+MONGO_PUBLIC_URL = os.getenv('MONGO_PUBLIC_URL')
