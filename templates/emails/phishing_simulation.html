@@ -27,6 +27,17 @@
         }
 
         .company-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .company-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .company-logo-text {
             font-size: 24px;
             font-weight: bold;
             color: #0366d6;
@@ -83,7 +94,12 @@
 <div class="email-container">
     <div class="header">
         <div class="company-logo">
-            {{ company_name }}
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#0366d6"/>
+                <path d="M2 17L12 22L22 17V11L12 16L2 11V17Z" fill="#0366d6"/>
+                <path opacity="0.5" d="M2 11L12 16L22 11V7L12 12L2 7V11Z" fill="#0366d6"/>
+            </svg>
+            <span class="company-logo-text">{{ company_name }}</span>
             <span class="alert-badge">ACTION REQUIRED</span>
         </div>
     </div>
@@ -117,7 +133,7 @@
             IT department.</p>
         <p>&copy; {{ current_year }} {{ company_name }}. All rights reserved.</p>
         <!-- Tracking pixel -->
-        <img src="{{ tracking_pixel_url }}" width="1" height="1" style="display: block;" alt="">
+        <img src="{{ tracking_pixel_url }}" width="1" height="1" style="display: none; visibility: hidden;" alt="" />
     </div>
 </div>
 </body>
