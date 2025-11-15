@@ -36,7 +36,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    os.getenv('FRONTEND_URL', 'https://frontend-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
+    os.getenv('FRONTEND_URL', 'http://frontend-white-hat-project.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -44,7 +44,7 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    os.getenv('FRONTEND_URL', 'https://frontend-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
+    os.getenv('FRONTEND_URL', 'http://frontend-white-hat-project.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com'),
     
 ]
 # Application definition-
