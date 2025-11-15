@@ -189,3 +189,33 @@ class OfflineEvent(models.Model):
 
     def __str__(self):
         return f"{self.agent.agent_id} - {self.event_type}"
+
+
+class Log(models.Model):
+    REQUEST_STATUS_CHOICES = [
+        ('success', 'Success'),
+        ('failed', 'Failed'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    timestamp = models.DateTimeField(db_index=True)
+    employee_id = models.CharField(max_length=50, db_index=True)
+    session_id = models.CharField(max_length=255)
+    ip_address = models.GenericIPAddressField()
+    user_agent = models.TextField()
+    action_type = models.CharField(max_length=255, db_index=True)
+    resource_accessed = models.CharField(max_length=255)
+    resource_type = models.CharField(max_length=100)
+    request_status = models.CharField(max_length=50, choices=REQUEST_STATUS_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+        indexes = [
+            models.Index(fields=['-timestamp']),
+            models.Index(fields=['employee_id', '-timestamp']),
+            models.Index(fields=['action_type', '-timestamp']),
+        ]
+
+    def __str__(self):
+        return f"{self.employee_id} - {self.action_type} - {self.timestamp}"

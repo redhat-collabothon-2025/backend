@@ -1,8 +1,10 @@
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from django.urls import path, include
 from whitehat_app.logs.views import LogViewSet
 
 router = DefaultRouter()
-router.register('', LogViewSet, basename='log')
+router.register(r'', LogViewSet, basename='log')
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('', include(router.urls)),
+]

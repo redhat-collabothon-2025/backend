@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory
+from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory, Log
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -109,3 +109,9 @@ class IncidentUpdateSerializer(serializers.Serializer):
         choices=['LOW', 'MEDIUM', 'CRITICAL'],
         required=False
     )
+
+
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Log
+        fields = '__all__'
