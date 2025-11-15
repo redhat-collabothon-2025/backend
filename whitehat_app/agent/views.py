@@ -316,3 +316,207 @@ def offline_queue(request):
             {'error': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@extend_schema(
+    parameters=[
+        {
+            'name': 'agent_id',
+            'in': 'query',
+            'required': True,
+            'schema': {'type': 'string'}
+        }
+    ],
+    responses={200: {'description': 'Agent commands retrieved'}}
+)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_commands(request):
+    """Get pending commands for an agent"""
+    try:
+        agent_id = request.query_params.get('agent_id')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # For now, return empty commands list
+        # Future: implement AgentCommand model and retrieve pending commands
+        return Response({
+            'commands': []
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@extend_schema(
+    parameters=[
+        {
+            'name': 'agent_id',
+            'in': 'query',
+            'required': True,
+            'schema': {'type': 'string'}
+        }
+    ],
+    responses={200: {'description': 'Whitelist retrieved'}}
+)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_whitelist(request):
+    """Get USB device whitelist for an agent"""
+    try:
+        agent_id = request.query_params.get('agent_id')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # For now, return empty whitelist
+        # Future: implement UsbWhitelist model
+        return Response({
+            'devices': []
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@extend_schema(
+    parameters=[
+        {
+            'name': 'agent_id',
+            'in': 'query',
+            'required': True,
+            'schema': {'type': 'string'}
+        }
+    ],
+    responses={200: {'description': 'Agent configuration retrieved'}}
+)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_agent_config(request):
+    """Get agent configuration"""
+    try:
+        agent_id = request.query_params.get('agent_id')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Return default configuration
+        # Future: make this configurable per agent or globally
+        return Response({
+            'enforce_acl': True,
+            'dangerous_ext': ['.exe', '.ps1', '.bat', '.vbs', '.scr', '.com', '.pif'],
+            'max_upload_size': 52428800  # 50MB
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@extend_schema(
+    request={
+        'application/json': {
+            'type': 'object',
+            'properties': {
+                'agent_id': {'type': 'string'},
+                'drive': {'type': 'string'},
+                'volume': {
+                    'type': 'object',
+                    'properties': {
+                        'label': {'type': 'string'},
+                        'fs': {'type': 'string'},
+                        'serial': {'type': 'string'}
+                    }
+                },
+                'files': {
+                    'type': 'array',
+                    'items': {
+                        'type': 'object',
+                        'properties': {
+                            'relpath': {'type': 'string'},
+                            'size': {'type': 'integer'},
+                            'ext': {'type': 'string'},
+                            'sha256': {'type': 'string'},
+                            'vt_result': {'type': 'object'}
+                        }
+                    }
+                },
+                'timestamp': {'type': 'integer'}
+            }
+        }
+    },
+    responses={200: {'description': 'USB event processed, file actions returned'}}
+)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def usb_event(request):
+    """Process USB insertion event and return file action policies"""
+    try:
+        data = request.data
+        agent_id = data.get('agent_id')
+        drive = data.get('drive')
+        volume = data.get('volume', {})
+        files = data.get('files', [])
+        timestamp = data.get('timestamp')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Verify agent exists
+        try:
+            agent = Agent.objects.get(agent_id=agent_id)
+        except Agent.DoesNotExist:
+            return Response(
+                {'error': 'agent_not_found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Analyze files and determine actions
+        file_actions = {}
+        dangerous_extensions = ['.exe', '.ps1', '.bat', '.vbs', '.scr', '.com', '.pif']
+
+        for file_info in files:
+            relpath = file_info.get('relpath')
+            ext = file_info.get('ext', '').lower()
+            vt_result = file_info.get('vt_result')
+
+            # Determine action based on file characteristics
+            if vt_result and vt_result.get('malicious', 0) > 0:
+                # VirusTotal detected malware
+                file_actions[relpath] = 'quarantine'
+            elif ext in dangerous_extensions:
+                # Dangerous extension - upload for deep scan
+                file_actions[relpath] = 'upload_for_deep_scan'
+            # else: allow by default (not added to file_actions)
+
+        return Response({
+            'default_action': 'allow',
+            'file_actions': file_actions
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
