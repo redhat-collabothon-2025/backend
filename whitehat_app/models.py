@@ -128,3 +128,64 @@ class RiskHistory(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.risk_score}"
+
+
+class Agent(models.Model):
+    STATUS_CHOICES = [
+        ('online', 'Online'),
+        ('offline', 'Offline'),
+        ('suspicious', 'Suspicious'),
+    ]
+
+    agent_id = models.CharField(max_length=255, unique=True, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)
+    hostname = models.CharField(max_length=255)
+    os_type = models.CharField(max_length=50)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='offline')
+    last_heartbeat = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.agent_id} - {self.hostname}"
+
+
+class FileUpload(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('uploading', 'Uploading'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+    ]
+
+    upload_id = models.CharField(max_length=255, unique=True, primary_key=True)
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, db_index=True)
+    file_path = models.TextField()
+    file_size = models.BigIntegerField()
+    file_hash = models.CharField(max_length=64)
+    minio_url = models.TextField()
+    bucket = models.CharField(max_length=255)
+    object_name = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.upload_id} - {self.file_path}"
+
+
+class OfflineEvent(models.Model):
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, db_index=True)
+    event_type = models.CharField(max_length=50)
+    payload = models.JSONField()
+    timestamp = models.BigIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.agent.agent_id} - {self.event_type}"

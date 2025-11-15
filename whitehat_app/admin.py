@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory
+from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory, Agent, FileUpload, OfflineEvent
 
 
 class UserCreationForm(forms.ModelForm):
@@ -85,3 +85,24 @@ class IncidentAdmin(admin.ModelAdmin):
 class RiskHistoryAdmin(admin.ModelAdmin):
     list_display = ('user', 'risk_score', 'created_at')
     search_fields = ('user__email',)
+
+
+@admin.register(Agent)
+class AgentAdmin(admin.ModelAdmin):
+    list_display = ('agent_id', 'hostname', 'user', 'os_type', 'status', 'last_heartbeat')
+    list_filter = ('status', 'os_type')
+    search_fields = ('agent_id', 'hostname', 'user__email')
+
+
+@admin.register(FileUpload)
+class FileUploadAdmin(admin.ModelAdmin):
+    list_display = ('upload_id', 'agent', 'file_path', 'file_size', 'status', 'created_at')
+    list_filter = ('status',)
+    search_fields = ('upload_id', 'agent__agent_id', 'file_path')
+
+
+@admin.register(OfflineEvent)
+class OfflineEventAdmin(admin.ModelAdmin):
+    list_display = ('agent', 'event_type', 'timestamp', 'created_at')
+    list_filter = ('event_type',)
+    search_fields = ('agent__agent_id',)

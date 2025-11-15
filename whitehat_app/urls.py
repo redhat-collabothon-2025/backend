@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
+from whitehat_app.minio_proxy import views as minio_views
 
 urlpatterns = [
     path('auth/', include('whitehat_app.auth.urls')),
@@ -9,5 +10,6 @@ urlpatterns = [
     path('incidents/', include('whitehat_app.incidents.urls')),
     path('risks/', include('whitehat_app.risks.urls')),
     path('phishing/', include('whitehat_app.emails.urls')),
-
+    path('agent/', include('whitehat_app.agent.urls')),
+    re_path(r'^minio/(?P<bucket>[^/]+)/(?P<object_name>.+)$', minio_views.minio_proxy),
 ]
