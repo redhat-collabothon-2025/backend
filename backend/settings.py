@@ -124,6 +124,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Source - https://stackoverflow.com/a
+# Posted by uedemir, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-11-15, License - CC BY-SA 4.0
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365),  
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365), 
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 

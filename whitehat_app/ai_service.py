@@ -14,7 +14,6 @@ class GraniteAIService:
         )
         
         self.api_token = os.getenv('AI_API_TOKEN', None)
-        print(self.api_token)
         self.model = os.getenv('AI_MODEL_NAME', "granite-3b")
         self.timeout = int(os.getenv('AI_TIMEOUT', 60))
         
