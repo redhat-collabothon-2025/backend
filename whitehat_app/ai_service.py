@@ -1,3 +1,4 @@
+import os
 import requests
 import random
 from typing import Optional
@@ -6,9 +7,21 @@ from typing import Optional
 class GraniteAIService:
 
     def __init__(self):
-        self.api_url = "http://granite-7b-lab-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com/v1/chat/completions"
-        self.model = "granite-7b-lab"
-        self.timeout = 60
+        # Read from environment variables, with fallback to default
+        self.api_url = os.getenv(
+            'AI_API_URL',
+            "http://granite-7b-lab-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com/v1/chat/completions"
+        )
+        self.api_token = os.getenv('AI_API_TOKEN', None)
+        self.model = os.getenv('AI_MODEL_NAME', "granite-7b-lab")
+        self.timeout = int(os.getenv('AI_TIMEOUT', 60))
+        
+        # Prepare headers with authentication if token is provided
+        self.headers = {
+            'Content-Type': 'application/json'
+        }
+        if self.api_token:
+            self.headers['Authorization'] = f'Bearer {self.api_token}'
 
     def generate_linkedin_message(self, user_name: str, sender_name: str, sender_company: str) -> Optional[str]:
 
@@ -20,6 +33,7 @@ Keep it under 100 words."""
         try:
             response = requests.post(
                 self.api_url,
+                headers=self.headers,
                 json={
                     "model": self.model,
                     "messages": [
@@ -54,6 +68,7 @@ Keep it under 80 words."""
         try:
             response = requests.post(
                 self.api_url,
+                headers=self.headers,
                 json={
                     "model": self.model,
                     "messages": [
@@ -89,6 +104,7 @@ Make it realistic and professional. Use real-sounding names and companies."""
         try:
             response = requests.post(
                 self.api_url,
+                headers=self.headers,
                 json={
                     "model": self.model,
                     "messages": [
@@ -138,6 +154,7 @@ Make it realistic and professional."""
         try:
             response = requests.post(
                 self.api_url,
+                headers=self.headers,
                 json={
                     "model": self.model,
                     "messages": [
@@ -249,6 +266,7 @@ Low-risk activities include: normal logins, standard file access, routine operat
         try:
             response = requests.post(
                 self.api_url,
+                headers=self.headers,
                 json={
                     "model": self.model,
                     "messages": [
