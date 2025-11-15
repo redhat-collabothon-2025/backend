@@ -60,7 +60,7 @@ class Command(BaseCommand):
                     critical_risk_count += 1
 
                 # Create incident if needed
-                if analysis['create_incident'] and analysis['risk_level'] in ['MEDIUM', 'CRITICAL']:
+                if analysis['create_incident']:
                     # Try to find user by email (employee_id might be email)
                     user = None
                     try:

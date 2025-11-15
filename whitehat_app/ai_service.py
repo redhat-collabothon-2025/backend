@@ -296,39 +296,83 @@ Low-risk activities include: normal logins, standard file access, routine operat
         """Fallback rule-based risk analysis if AI fails."""
         action_type = log_data.get('action_type', '').lower()
         request_status = log_data.get('request_status', '').lower()
-
-        # Critical risk patterns
-        critical_patterns = ['confidential', 'sensitive_data_export', 'bulk_data_download', 'sensitive']
-        # Medium risk patterns
-        medium_patterns = ['export', 'bulk', 'download', 'unusual', 'restricted']
+        resource_type = log_data.get('resource_type', '').lower()
+        resource_accessed = log_data.get('resource_accessed', '').lower()
 
         risk_level = 'LOW'
         create_incident = False
         description = f"Standard activity: {log_data.get('action_type', 'unknown action')}"
 
-        # Check for critical patterns
-        for pattern in critical_patterns:
-            if pattern in action_type:
-                risk_level = 'CRITICAL'
+        # Define sensitive data indicators
+        sensitive_indicators = ['confidential', 'sensitive', 'secret', 'classified', 'private']
+        risky_actions = ['export', 'download', 'bulk', 'mass', 'transfer', 'share']
+
+        # Check if dealing with sensitive data
+        is_sensitive = any(indicator in action_type or indicator in resource_accessed or indicator in resource_type
+                          for indicator in sensitive_indicators)
+
+        # Check if action is risky
+        is_risky_action = any(action in action_type for action in risky_actions)
+
+        # Define truly routine actions that should NOT create any incidents
+        no_incident_actions = ['login', 'logout', 'navigate', 'access_dashboard',
+                              'search', 'browse', 'update_profile']
+        is_no_incident = any(routine in action_type for routine in no_incident_actions)
+
+        # CRITICAL: Sensitive data + risky action combination
+        if is_sensitive and is_risky_action:
+            risk_level = 'CRITICAL'
+            create_incident = True
+            description = f"Critical security event: {action_type} on sensitive resource detected for employee {log_data.get('employee_id', 'unknown')}"
+
+        # CRITICAL: Multiple authentication failures or unauthorized access
+        elif 'unauthorized' in action_type or 'breach' in action_type:
+            risk_level = 'CRITICAL'
+            create_incident = True
+            description = f"Critical security event: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
+
+        # MEDIUM: Risky actions on non-sensitive data OR access to restricted resources
+        elif is_risky_action or 'restricted' in action_type or 'restricted' in resource_accessed:
+            # Exception: Normal single file downloads/views are LOW risk but still trackable
+            if action_type in ['download_file', 'view_file', 'access_file', 'open_file', 'read_file'] and 'bulk' not in action_type and 'mass' not in action_type:
+                risk_level = 'LOW'
                 create_incident = True
-                description = f"Critical security event: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
-                break
-
-        # Check for medium patterns if not critical
-        if risk_level == 'LOW':
-            for pattern in medium_patterns:
-                if pattern in action_type:
-                    risk_level = 'MEDIUM'
-                    create_incident = True
-                    description = f"Suspicious activity: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
-                    break
-
-        # Failed requests increase risk
-        if request_status == 'failed' and risk_level != 'CRITICAL':
-            if risk_level == 'LOW':
+                description = f"Low risk activity: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+            else:
                 risk_level = 'MEDIUM'
                 create_incident = True
-                description = f"Failed access attempt: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+                description = f"Suspicious activity: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
+
+        # MEDIUM: Failed access to restricted resources
+        elif request_status == 'failed' and ('restricted' in resource_accessed or 'confidential' in resource_accessed):
+            risk_level = 'MEDIUM'
+            create_incident = True
+            description = f"Failed access to restricted resource: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+
+        # LOW: Failed login or other failed operations
+        elif request_status == 'failed':
+            risk_level = 'LOW'
+            create_incident = True
+            description = f"Failed operation: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+
+        # LOW: Document/file operations that should be tracked
+        elif any(op in action_type for op in ['view_document', 'edit_document', 'create_document',
+                                                'view_report', 'access_file', 'read', 'open']):
+            risk_level = 'LOW'
+            create_incident = True
+            description = f"Low risk activity: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+
+        # NO INCIDENT: Truly routine operations
+        elif is_no_incident:
+            risk_level = 'LOW'
+            create_incident = False
+            description = f"Standard activity: {log_data.get('action_type', 'unknown action')}"
+
+        # LOW: Everything else that's successful (default trackable behavior)
+        elif request_status == 'success':
+            risk_level = 'LOW'
+            create_incident = True
+            description = f"Low risk activity: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
 
         return {
             'risk_level': risk_level,
