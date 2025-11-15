@@ -12,7 +12,9 @@ class GraniteAIService:
             'AI_API_URL',
             "https://granite-3b-white-hat-project.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com/v1/chat/completions"
         )
+        
         self.api_token = os.getenv('AI_API_TOKEN', None)
+        print(self.api_token)
         self.model = os.getenv('AI_MODEL_NAME', "granite-3b")
         self.timeout = int(os.getenv('AI_TIMEOUT', 60))
         
