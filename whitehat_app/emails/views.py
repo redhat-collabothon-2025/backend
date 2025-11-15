@@ -9,13 +9,40 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
-from whitehat_app.models import User, Campaign, Event
+from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory
 from ..serializers import (
     SendPhishingEmailSerializer,
     BulkPhishingSerializer,
     PhishingResponseSerializer,
     BulkPhishingResponseSerializer
 )
+
+
+def update_user_risk(user, risk_increase, reason):
+    """
+    Update user's risk score and create risk history entry.
+    Also updates risk level based on score thresholds.
+    """
+    user.risk_score += risk_increase
+
+    # Update risk level based on score
+    if user.risk_score >= 70:
+        user.risk_level = 'CRITICAL'
+    elif user.risk_score >= 40:
+        user.risk_level = 'MEDIUM'
+    else:
+        user.risk_level = 'LOW'
+
+    user.save()
+
+    # Create risk history entry
+    RiskHistory.objects.create(
+        user=user,
+        risk_score=user.risk_score,
+        reason=reason
+    )
+
+    return user
 
 
 @extend_schema(
@@ -176,11 +203,33 @@ def track_click(request, tracking_id):
             event_data__tracking_id=tracking_id
         ).first()
 
-        if event:
+        if event and not event.event_data.get('clicked', False):
+            # Mark as clicked
             event.event_data['clicked'] = True
             event.event_data['clicked_at'] = datetime.now().isoformat()
             event.save()
 
+            template_type = event.event_data.get('template_type', 'unknown')
+
+            # Update user risk score for clicking phishing link (higher risk)
+            update_user_risk(
+                user=event.user,
+                risk_increase=25,
+                reason=f'Clicked on phishing link ({template_type} template)'
+            )
+
+            # Create security incident
+            severity = 'MEDIUM'
+            if event.user.risk_score >= 70:
+                severity = 'CRITICAL'
+
+            Incident.objects.create(
+                user=event.user,
+                incident_type=f'Phishing Link Click - {template_type.title()}',
+                severity=severity
+            )
+
+            # Update campaign stats
             if 'campaign_id' in event.event_data and event.event_data['campaign_id']:
                 try:
                     campaign = Campaign.objects.get(id=event.event_data['campaign_id'])
@@ -211,10 +260,19 @@ def track_open(request, tracking_id):
             event_data__tracking_id=tracking_id
         ).first()
 
-        if event:
+        if event and not event.event_data.get('opened', False):
+            # Mark as opened
             event.event_data['opened'] = True
             event.event_data['opened_at'] = datetime.now().isoformat()
             event.save()
+
+            # Update user risk score for opening phishing email
+            template_type = event.event_data.get('template_type', 'unknown')
+            update_user_risk(
+                user=event.user,
+                risk_increase=5,
+                reason=f'Opened phishing email ({template_type} template)'
+            )
 
         pixel = b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00\x21\xF9\x04\x01\x00\x00\x00\x00\x2C\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02\x44\x01\x00\x3B'
 
