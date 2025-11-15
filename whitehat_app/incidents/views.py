@@ -27,11 +27,18 @@ class IncidentViewSet(viewsets.ModelViewSet):
     )
     def list(self, request):
         queryset = self.get_queryset()
+        severity = self.request.query_params.get('severity')
+
+        # Disable pagination when filtering by severity to show all incidents
+        if severity:
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
-        
+
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 

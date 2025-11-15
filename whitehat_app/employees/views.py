@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-from django.db.models import Count, Max
+from django.db.models import Count, Max, Q
 from drf_spectacular.utils import extend_schema
 from whitehat_app.models import User, RiskHistory, Incident, Event
 from whitehat_app.serializers import UserSerializer, RiskHistorySerializer
@@ -17,8 +17,16 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = User.objects.all()
         risk_level = self.request.query_params.get('risk_level')
+        search = self.request.query_params.get('search')
+
         if risk_level:
             queryset = queryset.filter(risk_level=risk_level)
+
+        if search:
+            queryset = queryset.filter(
+                Q(name__icontains=search) | Q(email__icontains=search)
+            )
+
         return queryset.order_by('-created_at')
 
     @extend_schema(

@@ -30,9 +30,9 @@ def overview(request):
     critical_count = User.objects.filter(risk_level='CRITICAL').count()
     medium_count = User.objects.filter(risk_level='MEDIUM').count()
     low_count = User.objects.filter(risk_level='LOW').count()
-    
-    seven_days_ago = timezone.now() - timedelta(days=7)
-    recent_incidents = Incident.objects.filter(created_at__gte=seven_days_ago).count()
+
+    thirty_days_ago = timezone.now() - timedelta(days=30)
+    recent_incidents = Incident.objects.filter(created_at__gte=thirty_days_ago).count()
     
     return Response({
         'total_employees': total_employees,
@@ -98,42 +98,47 @@ def distribution(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def trending(request):
+    from django.db.models import Case, When, IntegerField, Sum
+
     thirty_days_ago = timezone.now() - timedelta(days=30)
-    
+
     risk_history = RiskHistory.objects.filter(
         created_at__gte=thirty_days_ago
     ).values('created_at__date').annotate(
-        avg_risk=Avg('risk_score')
+        avg_risk=Avg('risk_score'),
+        critical_count=Sum(
+            Case(
+                When(risk_score__gte=50, then=1),
+                default=0,
+                output_field=IntegerField()
+            )
+        ),
+        medium_count=Sum(
+            Case(
+                When(risk_score__gte=20, risk_score__lt=50, then=1),
+                default=0,
+                output_field=IntegerField()
+            )
+        ),
+        low_count=Sum(
+            Case(
+                When(risk_score__lt=20, then=1),
+                default=0,
+                output_field=IntegerField()
+            )
+        )
     ).order_by('created_at__date')
-    
+
     result = []
     for item in risk_history:
-        date = item['created_at__date']
-        
-        critical_count = RiskHistory.objects.filter(
-            created_at__date=date,
-            risk_score__gte=50
-        ).count()
-        
-        medium_count = RiskHistory.objects.filter(
-            created_at__date=date,
-            risk_score__gte=20,
-            risk_score__lt=50
-        ).count()
-        
-        low_count = RiskHistory.objects.filter(
-            created_at__date=date,
-            risk_score__lt=20
-        ).count()
-        
         result.append({
-            'date': date.isoformat(),
+            'date': item['created_at__date'].isoformat(),
             'average_risk_score': round(item['avg_risk'], 2),
-            'critical_count': critical_count,
-            'medium_count': medium_count,
-            'low_count': low_count
+            'critical_count': item['critical_count'],
+            'medium_count': item['medium_count'],
+            'low_count': item['low_count']
         })
-    
+
     return Response(result)
 
 
@@ -143,7 +148,7 @@ def trending(request):
         'items': {
             'type': 'object',
             'properties': {
-                'department': {'type': 'string'},
+                'risk_level': {'type': 'string'},
                 'week': {'type': 'string'},
                 'risk_score': {'type': 'number'},
                 'incident_count': {'type': 'integer'}
@@ -154,30 +159,38 @@ def trending(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def heatmap(request):
+    from django.db.models import Case, When, IntegerField, Sum
+
     result = []
-    
+
     thirty_days_ago = timezone.now() - timedelta(days=30)
-    
-    departments = ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance', 'Operations']
-    
+
+    risk_levels = ['LOW', 'MEDIUM', 'CRITICAL']
+
     for week_num in range(4):
         week_start = thirty_days_ago + timedelta(weeks=week_num)
         week_end = week_start + timedelta(days=7)
         week_label = f"Week {week_num + 1}"
-        
-        for department in departments:
+
+        for risk_level in risk_levels:
+            # Get users with this risk level
+            users_with_risk = User.objects.filter(risk_level=risk_level)
+
+            # Count incidents for users with this risk level in this week
             incidents_count = Incident.objects.filter(
+                user__risk_level=risk_level,
                 created_at__gte=week_start,
                 created_at__lt=week_end
             ).count()
-            
-            avg_risk = User.objects.aggregate(avg=Avg('risk_score'))['avg'] or 0
-            
+
+            # Average risk score for users with this risk level
+            avg_risk = users_with_risk.aggregate(avg=Avg('risk_score'))['avg'] or 0
+
             result.append({
-                'department': department,
+                'risk_level': risk_level,
                 'week': week_label,
-                'risk_score': round(avg_risk + (hash(department) % 20), 2),
+                'risk_score': round(avg_risk, 2),
                 'incident_count': incidents_count
             })
-    
+
     return Response(result)
