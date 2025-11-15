@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LinkedIn</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f3f2ef; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', Arial, sans-serif;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f3f2ef;">
+        <tr>
+            <td style="padding: 40px 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td style="padding: 16px 24px; background-color: #ffffff; border-bottom: 1px solid #e0e0e0;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td width="135" valign="middle">
+                                        <!-- LinkedIn Logo -->
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+                                                <td style="vertical-align: middle;">
+                                                    <div style="width: 34px; height: 34px; background-color: #0077b5; border-radius: 4px; display: inline-block; text-align: center; line-height: 34px;">
+                                                        <span style="color: #ffffff; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">in</span>
+                                                    </div>
+                                                </td>
+                                                <td style="padding-left: 8px; vertical-align: middle;">
+                                                    <span style="font-size: 21px; font-weight: bold; color: #0077b5; font-family: Arial, sans-serif; letter-spacing: -0.5px;">Linked</span><span style="font-size: 21px; font-weight: bold; color: #0077b5; font-family: Arial, sans-serif;">in</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="right" valign="middle">
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                            <tr>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">Home</a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">Messaging</a>
+                                                </td>
+                                                <td style="padding: 0 8px;">
+                                                    <a href="{{ phishing_link }}" style="font-size: 12px; color: #666666; text-decoration: none; font-weight: 400;">Jobs</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Notification Badge -->
+                    <tr>
+                        <td style="padding: 24px 24px 0 24px;">
+                            <div style="display: inline-block; background-color: #0077b5; color: #ffffff; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">
+                                {{ new_messages_count }} NEW MESSAGE{% if new_messages_count > 1 %}S{% endif %}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Main Content -->
+                    <tr>
+                        <td style="padding: 20px 24px 32px 24px;">
+
+                            <!-- Title -->
+                            <h1 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 400; color: #000000; line-height: 1.3;">
+                                You have {{ new_messages_count }} new message{% if new_messages_count > 1 %}s{% endif %}
+                            </h1>
+
+                            <!-- Message Card -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f9fafb; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 24px;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="72" valign="top">
+                                                    <!-- Avatar Circle -->
+                                                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%); display: flex; align-items: center; justify-content: center;">
+                                                        <span style="font-size: 24px; font-weight: 600; color: #ffffff; line-height: 64px; text-align: center; display: block;">{{ sender_initials }}</span>
+                                                    </div>
+                                                </td>
+                                                <td valign="top" style="padding-left: 16px;">
+                                                    <div style="margin-bottom: 4px;">
+                                                        <a href="{{ phishing_link }}" style="font-size: 16px; font-weight: 600; color: #0077b5; text-decoration: none; line-height: 1.4;">{{ sender_name }}</a>
+                                                    </div>
+                                                    <div style="font-size: 13px; color: #666666; line-height: 1.4; margin-bottom: 12px;">
+                                                        {{ sender_title }} at {{ sender_company }}
+                                                    </div>
+                                                    <!-- Message Preview Box -->
+                                                    <div style="background-color: #ffffff; border: 1px solid #d0d0d0; border-radius: 4px; padding: 12px; margin-top: 8px;">
+                                                        <p style="margin: 0; font-size: 14px; color: #000000; line-height: 1.6;">
+                                                            {{ message_preview }}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- CTA Button -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td align="center" style="padding: 8px 0 24px 0;">
+                                        <a href="{{ phishing_link }}" style="display: inline-block; padding: 12px 24px; background-color: #0077b5; color: #ffffff; text-decoration: none; border-radius: 24px; font-size: 16px; font-weight: 600; text-align: center; min-width: 200px;">
+                                            Reply to {{ sender_name }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Divider -->
+                            <div style="border-top: 1px solid #e0e0e0; margin: 24px 0;"></div>
+
+                            <!-- Stats -->
+                            <p style="margin: 0; font-size: 14px; color: #666666; text-align: center; line-height: 1.6;">
+                                You have <strong style="color: #000000;">{{ pending_invitations }}</strong> pending connection invitations<br>
+                                <strong style="color: #000000;">{{ unread_messages }}</strong> unread messages waiting for you
+                            </p>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 24px; background-color: #f9fafb; border-top: 1px solid #e0e0e0;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="font-size: 12px; color: #666666; line-height: 1.6;">
+                                        <p style="margin: 0 0 12px 0;">
+                                            This email was intended for {{ user_name }} ({{ user_email }}).
+                                        </p>
+                                        <p style="margin: 0 0 16px 0;">
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Learn why we included this</a> ·
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Unsubscribe</a> ·
+                                            <a href="#" style="color: #0077b5; text-decoration: none;">Help</a>
+                                        </p>
+                                        <p style="margin: 0; color: #999999; font-size: 11px;">
+                                            © {{ current_year }} LinkedIn Corporation, 1000 W Maude Avenue, Sunnyvale, CA 94085
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Tracking Pixel -->
+    <img src="{{ tracking_pixel_url }}" width="1" height="1" alt="" style="display: none; visibility: hidden;">
+
+</body>
+</html>

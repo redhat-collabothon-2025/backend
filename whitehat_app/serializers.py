@@ -77,6 +77,7 @@ class BulkPhishingResponseSerializer(serializers.Serializer):
     message = serializers.CharField()
     sent_count = serializers.IntegerField()
     failed_count = serializers.IntegerField()
+    skipped_count = serializers.IntegerField()
 
 
 class AddTargetsSerializer(serializers.Serializer):
