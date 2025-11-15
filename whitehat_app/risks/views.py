@@ -109,47 +109,91 @@ def distribution(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def trending(request):
-    from django.db.models import Case, When, IntegerField, Sum
+    from django.db.models import Max, Subquery, OuterRef, Q
+    from collections import defaultdict
+    from datetime import datetime
 
-    thirty_days_ago = timezone.now() - timedelta(days=30)
-
-    risk_history = RiskHistory.objects.filter(
-        created_at__gte=thirty_days_ago
-    ).values('created_at__date').annotate(
-        avg_risk=Avg('risk_score'),
-        critical_count=Sum(
-            Case(
-                When(risk_score__gte=50, then=1),
-                default=0,
-                output_field=IntegerField()
-            )
-        ),
-        medium_count=Sum(
-            Case(
-                When(risk_score__gte=20, risk_score__lt=50, then=1),
-                default=0,
-                output_field=IntegerField()
-            )
-        ),
-        low_count=Sum(
-            Case(
-                When(risk_score__lt=20, then=1),
-                default=0,
-                output_field=IntegerField()
-            )
-        )
-    ).order_by('created_at__date')
-
+    # Get date range for last 30 days
+    end_date = timezone.now().date()
+    start_date = end_date - timedelta(days=30)
+    
+    # Get all active users with their current state
+    active_users = User.objects.filter(is_active=True)
+    
+    # Get all risk history entries in the date range
+    risk_history_entries = RiskHistory.objects.filter(
+        created_at__date__gte=start_date,
+        created_at__date__lte=end_date
+    ).select_related('user').order_by('created_at')
+    
+    # Build a map of user_id -> list of (date, risk_score, risk_level) tuples
+    user_history = defaultdict(list)
+    for entry in risk_history_entries:
+        entry_date = entry.created_at.date()
+        # Determine risk level from risk score
+        if entry.risk_score >= 50:
+            risk_level = 'CRITICAL'
+        elif entry.risk_score >= 20:
+            risk_level = 'MEDIUM'
+        else:
+            risk_level = 'LOW'
+        user_history[entry.user_id].append((entry_date, entry.risk_score, risk_level))
+    
+    # For each user, also add their current state as the latest entry
+    for user in active_users:
+        user_history[user.id].append((end_date, user.risk_score, user.risk_level))
+    
+    # Generate data for each day
     result = []
-    for item in risk_history:
+    current_date = start_date
+    
+    while current_date <= end_date:
+        # For each day, determine each user's state at that point in time
+        daily_user_states = {}
+        
+        for user_id, history in user_history.items():
+            # Find the most recent entry up to current_date
+            latest_entry = None
+            for entry_date, risk_score, risk_level in history:
+                if entry_date <= current_date:
+                    if latest_entry is None or entry_date > latest_entry[0]:
+                        latest_entry = (entry_date, risk_score, risk_level)
+            
+            if latest_entry:
+                daily_user_states[user_id] = latest_entry[2]  # risk_level
+        
+        # Count users by risk level for this day
+        critical_count = sum(1 for level in daily_user_states.values() if level == 'CRITICAL')
+        medium_count = sum(1 for level in daily_user_states.values() if level == 'MEDIUM')
+        low_count = sum(1 for level in daily_user_states.values() if level == 'LOW')
+        
+        # Calculate average risk score for this day
+        total_score = 0
+        count = 0
+        for user_id, history in user_history.items():
+            if user_id in daily_user_states:
+                # Find the risk score for this user on this date
+                latest_entry = None
+                for entry_date, risk_score, risk_level in history:
+                    if entry_date <= current_date:
+                        if latest_entry is None or entry_date > latest_entry[0]:
+                            latest_entry = (entry_date, risk_score, risk_level)
+                if latest_entry:
+                    total_score += latest_entry[1]
+                    count += 1
+        
+        avg_risk = (total_score / count) if count > 0 else 0
+        
         result.append({
-            'date': item['created_at__date'].isoformat(),
-            'average_risk_score': round(item['avg_risk'], 2),
-            'critical_count': item['critical_count'],
-            'medium_count': item['medium_count'],
-            'low_count': item['low_count']
+            'date': current_date.isoformat(),
+            'average_risk_score': round(avg_risk, 2),
+            'critical_count': critical_count,
+            'medium_count': medium_count,
+            'low_count': low_count
         })
-
+        
+        current_date += timedelta(days=1)
+    
     return Response(result)
 
 
