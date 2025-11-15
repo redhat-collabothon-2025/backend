@@ -109,41 +109,54 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     def recalculate(self, request):
         users = User.objects.all()
         recalculated_count = 0
-        
+
         for user in users:
             old_risk_score = user.risk_score
-            
+
             phishing_clicks = Event.objects.filter(user=user, event_type='phishing_click').count()
             bulk_exports = Event.objects.filter(user=user, event_type='bulk_export').count()
             usb_connects = Event.objects.filter(user=user, event_type='usb_connect').count()
             critical_incidents = Incident.objects.filter(user=user, severity='CRITICAL').count()
             medium_incidents = Incident.objects.filter(user=user, severity='MEDIUM').count()
-            
-            new_risk_score = (
+
+            # Calculate raw score
+            raw_score = (
                 phishing_clicks * 10 +
                 bulk_exports * 15 +
                 usb_connects * 8 +
                 critical_incidents * 25 +
                 medium_incidents * 12
             )
-            
+
+            # Normalize to 0-100 scale using diminishing returns formula
+            # This ensures scores asymptotically approach 100 but never exceed it
+            # The scaling factor of 100 means a raw score of 100 gives ~50 normalized score
+            # Formula: 100 * (1 - e^(-raw_score / scaling_factor))
+            import math
+            scaling_factor = 80  # Tune this to adjust how quickly scores approach 100
+            if raw_score == 0:
+                new_risk_score = 0
+            else:
+                new_risk_score = round(100 * (1 - math.exp(-raw_score / scaling_factor)), 2)
+
+            # Determine risk level based on normalized score
             if new_risk_score >= 50:
                 risk_level = 'CRITICAL'
             elif new_risk_score >= 20:
                 risk_level = 'MEDIUM'
             else:
                 risk_level = 'LOW'
-            
+
             if old_risk_score != new_risk_score:
                 user.risk_score = new_risk_score
                 user.risk_level = risk_level
                 user.save()
-                
+
                 RiskHistory.objects.create(
                     user=user,
                     risk_score=new_risk_score,
-                    reason=f'Recalculated: {phishing_clicks} phishing clicks, {bulk_exports} bulk exports, {usb_connects} USB connects, {critical_incidents} critical incidents, {medium_incidents} medium incidents'
+                    reason=f'Recalculated: {phishing_clicks} phishing clicks, {bulk_exports} bulk exports, {usb_connects} USB connects, {critical_incidents} critical incidents, {medium_incidents} medium incidents (raw: {raw_score})'
                 )
                 recalculated_count += 1
-        
+
         return Response({'message': f'Recalculated risk scores for {recalculated_count} users'})

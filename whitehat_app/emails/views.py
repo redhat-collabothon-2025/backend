@@ -24,13 +24,15 @@ def update_user_risk(user, risk_increase, reason):
     """
     Update user's risk score and create risk history entry.
     Also updates risk level based on score thresholds.
+    Ensures score never exceeds 100.
     """
-    user.risk_score += risk_increase
+    # Cap the score at 100
+    user.risk_score = min(100, user.risk_score + risk_increase)
 
-    # Update risk level based on score
-    if user.risk_score >= 70:
+    # Update risk level based on score (using same thresholds as recalculate)
+    if user.risk_score >= 50:
         user.risk_level = 'CRITICAL'
-    elif user.risk_score >= 40:
+    elif user.risk_score >= 20:
         user.risk_level = 'MEDIUM'
     else:
         user.risk_level = 'LOW'
@@ -242,9 +244,12 @@ def track_click(request, tracking_id):
             reason=f'Clicked on phishing link ({template_type} template)'
         )
 
-        severity = 'MEDIUM'
-        if event.user.risk_score >= 70:
+        # Determine severity based on updated risk score
+        severity = 'LOW'
+        if event.user.risk_score >= 50:
             severity = 'CRITICAL'
+        elif event.user.risk_score >= 20:
+            severity = 'MEDIUM'
 
         Incident.objects.create(
             user=event.user,
