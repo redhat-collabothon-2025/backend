@@ -24,12 +24,14 @@ from whitehat_app.models import User, Incident, RiskHistory
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def overview(request):
-    total_employees = User.objects.count()
-    average_risk_score = User.objects.aggregate(avg=Avg('risk_score'))['avg'] or 0
+    # Filter by active users only
+    active_users = User.objects.filter(is_active=True)
+    total_employees = active_users.count()
+    average_risk_score = active_users.aggregate(avg=Avg('risk_score'))['avg'] or 0
     
-    critical_count = User.objects.filter(risk_level='CRITICAL').count()
-    medium_count = User.objects.filter(risk_level='MEDIUM').count()
-    low_count = User.objects.filter(risk_level='LOW').count()
+    critical_count = active_users.filter(risk_level='CRITICAL').count()
+    medium_count = active_users.filter(risk_level='MEDIUM').count()
+    low_count = active_users.filter(risk_level='LOW').count()
 
     thirty_days_ago = timezone.now() - timedelta(days=30)
     recent_incidents = Incident.objects.filter(created_at__gte=thirty_days_ago).count()
@@ -60,21 +62,30 @@ def overview(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def distribution(request):
-    total_users = User.objects.count()
+    # Filter by active users only
+    active_users = User.objects.filter(is_active=True)
+    total_users = active_users.count()
     
     if total_users == 0:
         return Response([])
     
-    risk_distribution = User.objects.values('risk_level').annotate(
+    # Get distribution for each risk level
+    risk_distribution = active_users.values('risk_level').annotate(
         count=Count('id')
-    ).order_by('risk_level')
+    )
     
+    # Create a dictionary for easy lookup
+    distribution_dict = {item['risk_level']: item['count'] for item in risk_distribution}
+    
+    # Return in consistent order: CRITICAL, MEDIUM, LOW
+    # Ensure all three levels are always present (with 0 if no users)
     result = []
-    for item in risk_distribution:
+    for risk_level in ['CRITICAL', 'MEDIUM', 'LOW']:
+        count = distribution_dict.get(risk_level, 0)
         result.append({
-            'risk_level': item['risk_level'],
-            'count': item['count'],
-            'percentage': round((item['count'] / total_users) * 100, 2)
+            'risk_level': risk_level,
+            'count': count,
+            'percentage': round((count / total_users) * 100, 2) if total_users > 0 else 0
         })
     
     return Response(result)
