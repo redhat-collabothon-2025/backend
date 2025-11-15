@@ -214,6 +214,128 @@ Make it realistic and professional."""
         ]
         return random.choice(profiles)
 
+    def analyze_log_risk(self, log_data: dict) -> dict:
+        """Analyze a log entry to determine its risk level and generate incident details."""
+
+        action_type = log_data.get('action_type', '')
+        resource_type = log_data.get('resource_type', '')
+        resource_accessed = log_data.get('resource_accessed', '')
+        request_status = log_data.get('request_status', '')
+        employee_id = log_data.get('employee_id', '')
+
+        prompt = f"""You are a cybersecurity analyst. Analyze this employee activity log and determine if it represents a security risk.
+
+Activity Details:
+- Action: {action_type}
+- Resource Type: {resource_type}
+- Resource Accessed: {resource_accessed}
+- Status: {request_status}
+- Employee ID: {employee_id}
+
+Determine:
+1. Risk Level: LOW, MEDIUM, or CRITICAL
+2. Should this create a security incident? (yes/no)
+3. Brief incident description (one sentence, under 50 words)
+
+Respond ONLY in this exact format:
+Risk: [LOW/MEDIUM/CRITICAL]
+Incident: [yes/no]
+Description: [one sentence description]
+
+High-risk activities include: confidential file access, sensitive data exports, bulk downloads, failed authentication attempts, suspicious access patterns.
+Medium-risk activities include: unusual file downloads, access to restricted resources, multiple failed attempts.
+Low-risk activities include: normal logins, standard file access, routine operations."""
+
+        try:
+            response = requests.post(
+                self.api_url,
+                json={
+                    "model": self.model,
+                    "messages": [
+                        {"role": "system", "content": "You are a cybersecurity analyst evaluating security logs"},
+                        {"role": "user", "content": prompt}
+                    ],
+                    "max_tokens": 200,
+                    "temperature": 0.3
+                },
+                timeout=self.timeout
+            )
+            response.raise_for_status()
+
+            content = response.json()["choices"][0]["message"]["content"].strip()
+
+            # Parse the response
+            result = {
+                'risk_level': 'LOW',
+                'create_incident': False,
+                'description': ''
+            }
+
+            lines = content.split('\n')
+            for line in lines:
+                if ':' in line:
+                    key, value = line.split(':', 1)
+                    key = key.strip().lower()
+                    value = value.strip()
+
+                    if key == 'risk':
+                        result['risk_level'] = value.upper()
+                    elif key == 'incident':
+                        result['create_incident'] = value.lower() == 'yes'
+                    elif key == 'description':
+                        result['description'] = value
+
+            return result
+
+        except Exception as e:
+            print(f"AI risk analysis failed: {str(e)}")
+            # Fallback to rule-based analysis
+            return self._fallback_risk_analysis(log_data)
+
+    def _fallback_risk_analysis(self, log_data: dict) -> dict:
+        """Fallback rule-based risk analysis if AI fails."""
+        action_type = log_data.get('action_type', '').lower()
+        request_status = log_data.get('request_status', '').lower()
+
+        # Critical risk patterns
+        critical_patterns = ['confidential', 'sensitive_data_export', 'bulk_data_download', 'sensitive']
+        # Medium risk patterns
+        medium_patterns = ['export', 'bulk', 'download', 'unusual', 'restricted']
+
+        risk_level = 'LOW'
+        create_incident = False
+        description = f"Standard activity: {log_data.get('action_type', 'unknown action')}"
+
+        # Check for critical patterns
+        for pattern in critical_patterns:
+            if pattern in action_type:
+                risk_level = 'CRITICAL'
+                create_incident = True
+                description = f"Critical security event: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
+                break
+
+        # Check for medium patterns if not critical
+        if risk_level == 'LOW':
+            for pattern in medium_patterns:
+                if pattern in action_type:
+                    risk_level = 'MEDIUM'
+                    create_incident = True
+                    description = f"Suspicious activity: {action_type} detected for employee {log_data.get('employee_id', 'unknown')}"
+                    break
+
+        # Failed requests increase risk
+        if request_status == 'failed' and risk_level != 'CRITICAL':
+            if risk_level == 'LOW':
+                risk_level = 'MEDIUM'
+                create_incident = True
+                description = f"Failed access attempt: {action_type} by employee {log_data.get('employee_id', 'unknown')}"
+
+        return {
+            'risk_level': risk_level,
+            'create_incident': create_incident,
+            'description': description
+        }
+
 
 # Singleton instance
 ai_service = GraniteAIService()
