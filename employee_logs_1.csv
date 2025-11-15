@@ -1,0 +1,401 @@
+timestamp,employee_id,session_id,ip_address,user_agent,action_type,resource_accessed,resource_type,request_status
+2025-10-01 15:57:08,E017,d758620eb16ee0e0,192.168.33.69,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,failed_login,client_kpi_detailed,report,success
+2025-10-03 15:59:06,E010,88d77d8396bd06d5,10.206.182.86,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,training_portal,report,success
+2025-10-04 12:27:01,E014,765a401aebf56c87,10.114.54.21,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,access_restricted_folder,client_kpi_detailed,file_share,success
+2025-10-02 01:38:46,E010,2992806886d76036,192.168.145.196,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,public_policy_doc,dashboard,success
+2025-10-05 23:28:44,E016,3d66ddb30a3dffeb,192.168.212.82,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,login,crm_leads_view,file_share,success
+2025-10-02 15:20:19,E021,f099c5975eff7161,10.113.252.165,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login_outside_work_hours,contracts_folder_confidential,report,failed
+2025-10-03 08:16:59,E037,c214d3a45a28bdaf,205.5.104.247,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,multiple_password_resets,project_docs_general,database,success
+2025-10-05 16:46:30,E003,503c75f370217207,192.168.64.188,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_report,training_portal,file_share,success
+2025-10-02 11:41:53,E021,f6bbc1eb0c3a83c9,192.168.49.173,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,export_confidential_dataset,full_salary_export,dashboard,success
+2025-10-03 14:35:37,E038,0035f702ecebdcd2,10.90.115.4,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,login,vpn_portal,report,success
+2025-10-05 08:19:52,E031,2317b8cfea35e5d3,10.18.195.225,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,timesheet,database,success
+2025-10-02 08:27:03,E008,5568104ab10b3bc5,10.200.159.204,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,jira_board,dashboard,success
+2025-10-03 10:39:22,E027,32ae2f6a6381928a,192.168.177.106,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,timesheet,report,success
+2025-10-04 16:13:52,E015,87e968cd39269c8d,188.36.22.17,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,disable_audit_logs,board_meetings_minutes_full,dashboard,success
+2025-10-05 09:40:49,E005,0f9a299311f046ae,10.18.107.181,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,training_portal,dashboard,success
+2025-10-04 11:32:40,E011,49b2ce2fcd70399f,192.168.255.110,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,public_policy_doc,email,success
+2025-10-05 00:13:43,E005,b9bcb9f689d59ae6,10.209.116.129,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,intranet_home,document,success
+2025-10-04 05:45:17,E003,b8b8f3b3f3274e03,192.168.184.72,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,login,intranet_home,email,success
+2025-10-03 19:18:24,E020,f7cb763c5a2ac5f1,10.223.31.1,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,team_wiki,file_share,success
+2025-10-02 20:52:49,E005,ed4c35e8ca975329,10.162.164.120,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,public_policy_doc,report,success
+2025-10-05 15:55:56,E028,1673723d4415bd52,10.53.232.25,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,public_policy_doc,document,success
+2025-10-03 13:38:53,E010,df62bdc49cc6949a,192.168.82.1,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,training_portal,report,failed
+2025-10-01 14:46:16,E004,c6687d3cb76271bc,10.245.166.28,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,upload_file,crm_leads_view,file_share,success
+2025-10-04 08:22:09,E017,a7574b2d19903e89,192.168.34.205,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,vpn_portal,file_share,success
+2025-10-04 10:08:03,E018,48280f34918cd792,192.168.227.228,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,email_inbox,email,success
+2025-10-04 08:46:39,E027,0743d7995a66e4fe,192.168.179.152,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,email_inbox,report,success
+2025-10-05 06:27:39,E036,49b8000482c3078b,192.168.35.164,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,jira_board,database,success
+2025-10-04 14:36:13,E022,872349b03ecbc1f2,55.14.33.33,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,bulk_export,all_contracts_archive,dashboard,failed
+2025-10-01 10:33:46,E025,e3d89b8f7e63d1f5,192.168.227.44,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,intranet_home,email,success
+2025-10-05 12:35:09,E024,6e282b37fcbfd76c,10.89.138.95,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,share_confidential_link,finance_reports_q3,file_share,success
+2025-10-03 14:48:26,E009,404955ff225cff2e,10.204.239.108,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,crm_leads_view,dashboard,success
+2025-10-04 16:08:24,E026,0fb2ad325ffc74b8,10.222.180.135,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_file,timesheet,document,success
+2025-10-02 14:23:36,E035,5b3606f1241df2b8,10.164.53.125,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,jira_board,file_share,success
+2025-10-02 14:00:17,E010,9ff8095fa754b4c0,10.34.209.121,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,project_docs_general,document,success
+2025-10-03 17:59:23,E040,6d85024c3ec2e20e,192.168.133.214,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,training_portal,dashboard,success
+2025-10-04 16:39:34,E001,27263fb35df199a9,10.19.41.121,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,team_wiki,document,success
+2025-10-02 08:18:04,E013,91204ef361ace292,192.168.152.222,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,jira_board,dashboard,success
+2025-10-03 14:38:49,E039,fb68149a3b033800,10.73.234.214,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_confidential_document,intranet_home,dashboard,success
+2025-10-02 16:28:06,E014,ff4953d55025d57d,192.168.208.192,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,email_inbox,report,success
+2025-10-04 16:53:44,E029,9c7019bf29f03b1c,192.168.224.205,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,intranet_home,report,success
+2025-10-02 15:59:39,E028,7404c7a8863cdbfd,10.64.30.66,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login_outside_work_hours,finance_reports_q3,dashboard,success
+2025-10-01 14:20:14,E038,814ef638bebfd901,192.168.204.93,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,jira_board,report,success
+2025-10-03 09:12:09,E016,b72bb43324d921e5,192.168.91.23,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,crm_leads_view,dashboard,success
+2025-10-04 08:53:17,E010,dc41fc77f7924d83,192.168.232.151,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,public_policy_doc,report,success
+2025-10-05 09:46:16,E036,c4fea2c7226ad2f2,192.168.92.81,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,vpn_portal,report,success
+2025-10-02 15:55:37,E009,b1ad616d8a2bb15c,192.168.81.63,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,public_policy_doc,email,success
+2025-10-03 08:10:22,E014,9a53c03b47cae843,10.38.139.136,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_confidential_document,customer_db_dump,dashboard,success
+2025-10-01 03:18:25,E002,94de03384ecbd8b1,10.13.170.100,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,timesheet,report,success
+2025-10-04 18:58:59,E006,4fc190a2fe55d18f,10.100.235.9,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,intranet_home,email,success
+2025-10-02 09:19:17,E012,a7c40048c8ca847e,192.168.163.228,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,public_policy_doc,document,success
+2025-10-03 10:30:41,E030,1bd0fd55e9668e03,10.25.18.15,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,intranet_home,report,success
+2025-10-05 07:38:48,E003,68c5e0953c8e20a9,10.165.197.5,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_document,timesheet,report,success
+2025-10-03 09:52:17,E036,f4abe19a0aeebb18,10.125.62.239,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,team_wiki,database,success
+2025-10-01 20:37:02,E008,d5e835c3784cf238,192.168.3.141,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,security_incident_reports,file_share,success
+2025-10-05 13:54:16,E030,73c1060b6b32eee6,192.168.37.67,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,crm_leads_view,file_share,success
+2025-10-01 13:09:28,E035,3e77b5a4a9c2c9d6,192.168.179.27,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,edit_document,training_portal,database,success
+2025-10-03 12:51:26,E002,57b3edcab3c0cbe8,153.78.171.202,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,share_confidential_link,admin_shared_folder,email,success
+2025-10-05 11:08:05,E001,25fb0b41d0a1e654,192.168.205.193,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,download_file,public_policy_doc,document,success
+2025-10-03 06:15:18,E023,369eedb14e73a5d5,192.168.150.165,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,login,intranet_home,database,success
+2025-10-02 16:35:55,E038,1832da2165de5541,192.168.81.244,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_profile,intranet_home,report,success
+2025-10-04 15:32:05,E025,0d82ed1d6f86860d,10.225.150.229,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,vpn_portal,dashboard,success
+2025-10-05 01:50:08,E006,30d86e5956266c60,63.232.8.228,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,mass_download,finance_reports_q3,dashboard,success
+2025-10-02 15:57:16,E016,3b168035a4d6f961,192.168.191.151,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,project_docs_general,file_share,success
+2025-10-01 18:47:25,E035,937094ea85ced522,217.106.180.214,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_sensitive_file,team_wiki,file_share,failed
+2025-10-01 15:47:42,E033,f3b077bbc7708142,192.168.65.225,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,vpn_portal,dashboard,success
+2025-10-02 18:50:31,E016,01233d19caa2c721,10.5.246.29,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,project_docs_general,database,success
+2025-10-01 15:22:30,E021,fa06404c322179c0,10.174.49.203,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,crm_leads_view,database,success
+2025-10-05 12:40:07,E011,31e7a73faeddb5ac,10.147.176.222,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,jira_board,email,success
+2025-10-02 09:36:46,E018,9440a32abc8bfe2e,192.168.250.203,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login_outside_work_hours,credentials_vault_backup,dashboard,success
+2025-10-02 10:35:17,E035,a8142fe3adc7d865,192.168.33.23,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,timesheet,file_share,success
+2025-10-02 15:58:12,E021,57db00bc40449082,192.168.210.146,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,vpn_portal,report,success
+2025-10-05 14:01:09,E005,038de4bee1c80ffd,10.51.80.87,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,logout,client_kpi_detailed,document,failed
+2025-10-05 22:21:32,E019,cfa3f01b1a0409a1,10.27.89.217,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,training_portal,database,success
+2025-10-02 10:53:42,E040,260e199109766392,10.181.186.118,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_report,jira_board,report,success
+2025-10-05 09:30:47,E018,4b3c49f90d6d28e6,192.168.48.187,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,intranet_home,database,success
+2025-10-02 07:10:09,E031,1dfbcf5dbd554bf4,10.164.110.24,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,training_portal,document,success
+2025-10-02 12:17:07,E015,6fb9e1fffad8987a,192.168.2.99,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,intranet_home,file_share,success
+2025-10-03 13:28:24,E033,f260f151cf6f745d,10.139.205.59,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,export_confidential_dataset,finance_reports_q3,file_share,success
+2025-10-05 09:55:12,E029,e6c12003482fbb02,10.245.50.162,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,login,training_portal,dashboard,success
+2025-10-05 07:38:53,E016,57032b00c5eff70a,10.7.16.152,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_file,intranet_home,email,success
+2025-10-04 16:04:12,E038,3577bab0bd84e0da,10.165.22.93,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,project_docs_general,file_share,success
+2025-10-01 13:10:48,E033,07bda7a2915c0b75,10.238.183.121,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,crm_leads_view,file_share,success
+2025-10-04 16:02:17,E022,0caba0deb78b905d,10.216.169.210,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,update_profile,email_inbox,document,success
+2025-10-02 09:33:35,E026,206c0dc848ddfbaf,10.32.132.74,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,jira_board,report,success
+2025-10-03 12:36:35,E032,c15a5f2e59d79609,10.231.38.126,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,crm_leads_view,file_share,success
+2025-10-05 04:08:54,E013,9b76dc96cd0d9bbe,192.168.186.24,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,team_wiki,database,success
+2025-10-04 06:55:20,E028,a949b388e0072a81,192.168.89.154,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,public_policy_doc,document,success
+2025-10-04 22:26:46,E008,a93d3c671907b11d,192.168.96.125,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,email_inbox,report,success
+2025-10-03 11:36:20,E007,f2ef2c0184310634,192.168.156.219,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,public_policy_doc,email,success
+2025-10-01 15:17:11,E005,442fd917b43c89fb,192.168.170.228,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,bulk_export,raw_transactions_log,database,success
+2025-10-03 14:24:45,E040,3b5b82ff43c4985b,10.11.101.202,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,project_docs_general,dashboard,success
+2025-10-01 06:25:38,E009,118f9377045b00c4,192.168.251.156,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,intranet_home,dashboard,success
+2025-10-04 11:44:41,E040,e7e5c248be18f757,10.104.92.26,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,intranet_home,email,success
+2025-10-03 09:23:52,E037,c04fd3d12b0f0b40,192.168.126.57,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,timesheet,document,success
+2025-10-01 14:01:28,E001,2de23450844cc4fc,10.5.140.103,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,vpn_portal,file_share,success
+2025-10-01 10:24:21,E036,dd089bdd55df2f7c,10.55.150.27,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,team_wiki,report,success
+2025-10-05 06:51:18,E004,d895382dbca8057a,10.222.127.247,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,update_profile,jira_board,database,success
+2025-10-05 17:12:39,E023,3223a472f7fdc39d,192.168.137.196,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,public_policy_doc,file_share,success
+2025-10-01 11:23:56,E037,a89808fbbcd832ed,192.168.40.128,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,download_file,jira_board,email,success
+2025-10-04 10:04:11,E007,3e753a41330872a2,192.168.197.147,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,public_policy_doc,file_share,success
+2025-10-05 15:03:40,E016,b66ef4b2c840d686,10.23.51.92,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,vpn_portal,email,success
+2025-10-01 17:44:50,E002,342ec42a3fe7df49,192.168.229.193,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_report,timesheet,email,success
+2025-10-01 10:43:56,E040,6c9f863aef398ba1,10.185.81.114,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,project_docs_general,file_share,success
+2025-10-04 07:55:56,E023,8e7a9432dc85a903,10.184.54.18,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,project_docs_general,dashboard,success
+2025-10-02 09:56:19,E029,c4d97d6eaf9e11fe,192.168.232.94,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,jira_board,database,success
+2025-10-03 13:14:55,E010,f65ab2b29a1f20c6,192.168.246.54,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_confidential_document,public_policy_doc,file_share,success
+2025-10-03 12:21:36,E019,0fc90b87be23c77c,10.12.154.42,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,access_restricted_folder,finance_reports_q3,dashboard,failed
+2025-10-02 11:46:14,E017,7b864c0ee2b5c615,10.248.15.145,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,project_docs_general,file_share,success
+2025-10-05 16:05:03,E002,7d4446dcaebe1448,192.168.6.16,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,project_docs_general,database,success
+2025-10-05 14:30:32,E005,88f3e96f9a974156,192.168.119.119,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,team_wiki,report,success
+2025-10-04 09:10:05,E029,af6ef50088e80360,192.168.38.236,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,timesheet,file_share,success
+2025-10-02 10:49:29,E034,4aa43b1954bc2c06,10.12.103.107,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,intranet_home,dashboard,success
+2025-10-01 08:50:12,E001,d0657c65a6c921eb,10.13.15.112,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,crm_leads_view,document,success
+2025-10-01 08:15:14,E018,6007ebaca7c6c7cb,192.168.246.115,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,jira_board,dashboard,success
+2025-10-05 11:20:51,E018,07a7b4cd6f98ab98,10.195.93.198,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_report,email_inbox,dashboard,success
+2025-10-02 10:54:13,E018,d71091457d1dedd3,192.168.163.240,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,vpn_portal,document,success
+2025-10-05 20:15:14,E032,c2b277c3a88326b6,192.168.88.199,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,crm_leads_view,database,success
+2025-10-04 10:57:00,E013,f8cb5e0a89891f67,104.143.14.177,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,failed_login,hr_personal_files,email,success
+2025-10-02 12:05:58,E005,e64b895743bc41a9,10.167.183.158,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,login,project_docs_general,dashboard,success
+2025-10-04 12:16:47,E021,531182f23ae42bb4,192.168.169.248,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,public_policy_doc,database,success
+2025-10-01 08:26:55,E009,77f250468cd477af,10.87.10.226,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,jira_board,document,success
+2025-10-02 18:37:40,E037,d459621d10f44b4f,192.168.71.75,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,crm_leads_view,report,success
+2025-10-04 11:37:28,E003,219b9bfd4362dfd3,192.168.199.108,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_profile,training_portal,database,success
+2025-10-04 08:16:50,E006,958a90479c01865f,192.168.48.242,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,upload_file,public_policy_doc,file_share,success
+2025-10-02 15:01:39,E002,f36e16fce31ff623,75.108.51.22,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_confidential_document,hr_personal_files,email,success
+2025-10-02 13:40:11,E009,efceecbfdf935b0d,10.177.126.71,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,project_docs_general,dashboard,success
+2025-10-05 12:49:42,E032,b1a682c78626db9d,192.168.125.169,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,training_portal,database,success
+2025-10-03 17:51:48,E017,74e629c4dfd5f65f,192.168.233.225,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_file,timesheet,email,success
+2025-10-02 10:19:33,E039,bf8cbb7f2cae82a5,192.168.218.48,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,public_policy_doc,report,success
+2025-10-04 18:56:58,E029,8ffa8ffe303e87ae,10.158.198.177,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,training_portal,document,success
+2025-10-02 14:44:15,E004,96fd308067340698,192.168.20.95,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,finance_reports_q3,file_share,success
+2025-10-04 08:30:38,E012,32e7cf5386a59ac4,192.168.228.18,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,mass_download,hr_personal_files,file_share,success
+2025-10-03 13:07:12,E037,59b199236d794e89,192.168.130.98,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,intranet_home,document,success
+2025-10-02 16:01:02,E033,0a724d224932b769,10.55.18.91,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,timesheet,document,success
+2025-10-03 08:33:32,E010,a060ab6c12d63342,10.152.193.235,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,timesheet,database,success
+2025-10-03 18:30:02,E017,a0cfbd3f6a28442b,192.168.181.30,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,export_confidential_dataset,raw_transactions_log,report,success
+2025-10-02 09:28:16,E022,2df8833fd8a3d932,192.168.218.198,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,training_portal,email,success
+2025-10-05 15:38:21,E005,186038b5b34ca727,28.61.70.92,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,access_restricted_folder,timesheet,database,success
+2025-10-03 08:54:45,E040,6278633d5b1db59b,192.168.121.110,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,download_file,public_policy_doc,report,success
+2025-10-03 14:58:04,E009,2d5ff1419d5c2149,10.41.19.199,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,email_inbox,file_share,success
+2025-10-03 09:49:44,E013,3e78a0d82d90c808,10.154.139.188,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,timesheet,document,success
+2025-10-01 16:31:10,E004,35de25ca9788d0fe,10.69.163.135,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,timesheet,document,failed
+2025-10-03 11:41:57,E005,50a006461dd9c9c8,192.168.62.2,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,vpn_portal,dashboard,success
+2025-10-04 08:14:33,E031,a89e1c1307401529,192.168.36.38,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,update_profile,team_wiki,email,success
+2025-10-03 05:46:11,E001,5eafaec9d8f1593e,192.168.49.104,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_report,jira_board,report,success
+2025-10-04 11:18:04,E027,edfcf84fe7490b66,192.168.25.141,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_document,jira_board,document,success
+2025-10-04 16:11:16,E026,6a57ba12956b647f,10.60.16.88,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,jira_board,email,success
+2025-10-04 12:46:47,E035,c8ed9f05133247c6,72.140.37.176,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,intranet_home,report,success
+2025-10-04 07:27:37,E006,4fe959e0b2383ead,10.108.28.174,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,multiple_password_resets,salary_overview,dashboard,success
+2025-10-05 19:10:18,E024,572ad08840f4a2e9,10.231.197.191,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,vpn_portal,database,success
+2025-10-03 13:28:14,E025,83a39e3adb707df8,192.168.80.49,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,crm_leads_view,database,success
+2025-10-01 14:59:12,E021,bc9b04969c53a6f1,192.168.193.69,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,project_docs_general,dashboard,success
+2025-10-01 13:24:41,E002,c585530f53081cbf,192.168.163.89,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,edit_document,timesheet,file_share,success
+2025-10-03 10:18:26,E032,f9a8dadda5bc5038,10.171.103.203,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,admin_shared_folder,email,success
+2025-10-02 13:57:40,E039,232942d6033022ee,10.27.17.220,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,public_policy_doc,report,success
+2025-10-05 11:06:29,E018,3c26f28a085c1602,10.35.137.210,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_document,email_inbox,report,success
+2025-10-02 15:00:35,E016,6be02799657f1b9d,192.168.242.61,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,training_portal,report,success
+2025-10-03 05:39:20,E022,39f6a7eb5c7b852c,192.168.201.62,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,vpn_portal,database,success
+2025-10-02 18:15:24,E032,bde3b9c5895e27b2,192.168.155.97,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,jira_board,email,success
+2025-10-01 06:21:54,E034,f6a09c638bc66636,192.168.203.4,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,jira_board,report,success
+2025-10-03 11:47:33,E026,f95e65e0c104d3e0,10.235.14.154,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,jira_board,email,success
+2025-10-01 13:07:07,E003,430d4de36b2c30d2,10.36.131.154,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,intranet_home,email,success
+2025-10-01 12:09:22,E008,3ad61e9a7f50f17c,10.231.69.71,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,team_wiki,document,success
+2025-10-04 01:42:05,E032,ff4b56fc5add25cc,10.134.93.108,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,training_portal,database,success
+2025-10-04 06:37:39,E028,e17a0f4d07c74153,10.147.91.52,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,vpn_portal,email,success
+2025-10-04 10:56:51,E039,7049c11de662f8d7,143.72.79.212,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,failed_login,security_incident_reports,database,failed
+2025-10-02 09:19:48,E035,57a06c9f746e9d85,192.168.23.148,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,vpn_portal,report,success
+2025-10-04 16:18:20,E006,da494851c65d3053,192.168.232.22,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,training_portal,dashboard,success
+2025-10-04 12:34:48,E026,948f3845d870ef6b,10.119.182.40,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,email_inbox,database,success
+2025-10-01 06:06:40,E003,283f8a5af0b89b7f,192.168.108.21,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,public_policy_doc,dashboard,success
+2025-10-05 17:09:50,E036,c293f4fcab249475,192.168.26.193,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_report,jira_board,report,success
+2025-10-02 09:22:38,E010,99ed62ac7701bcee,192.168.172.157,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,crm_leads_view,dashboard,success
+2025-10-02 13:58:58,E015,798cc666a7a0bdc9,192.168.43.36,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,email_inbox,database,success
+2025-10-05 09:32:44,E002,35e2588aae00c53f,192.168.204.207,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,training_portal,document,success
+2025-10-05 17:53:30,E022,04b8009f4e9b2232,192.168.43.64,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,vpn_portal,database,success
+2025-10-04 10:25:00,E022,7286e354e0489f4a,10.20.34.228,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,admin_shared_folder,document,success
+2025-10-03 00:37:18,E035,8962caa7f9aedeb5,192.168.241.37,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,team_wiki,email,success
+2025-10-01 12:01:26,E006,b24e2a01a9fe2d8e,10.179.20.160,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,training_portal,dashboard,success
+2025-10-01 05:50:22,E012,b2089a71c98fe3b5,86.161.212.72,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,email_inbox,dashboard,success
+2025-10-01 21:44:38,E035,9793388768f2ebc3,192.168.143.24,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,login,project_docs_general,email,failed
+2025-10-02 12:27:58,E020,049218091642da8a,10.229.121.13,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_document,vpn_portal,database,success
+2025-10-04 10:55:47,E024,4ed6ecad05aee186,10.238.116.44,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,share_confidential_link,client_kpi_detailed,report,success
+2025-10-02 15:56:48,E036,17ab4697aa934553,10.58.193.31,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,crm_leads_view,email,success
+2025-10-04 16:04:25,E016,9bd95f322ae12e61,10.119.117.36,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,training_portal,report,failed
+2025-10-03 17:04:41,E016,3284ac4e1d26ebfe,192.168.218.210,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,email_inbox,report,failed
+2025-10-04 10:15:53,E018,0ee1f7b9c5b0ac94,10.179.205.222,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,timesheet,document,success
+2025-10-02 14:21:42,E001,ce72249c9bbaea35,192.168.4.19,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,team_wiki,file_share,success
+2025-10-05 12:50:56,E021,58b97f76d8738632,10.70.130.216,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,update_profile,vpn_portal,dashboard,success
+2025-10-03 07:58:37,E035,91e30e03ca637f5d,10.40.33.174,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,email_inbox,dashboard,success
+2025-10-02 08:03:13,E020,be6483df2c511b46,10.91.217.220,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,access_restricted_folder,credentials_vault_backup,database,success
+2025-10-01 23:47:50,E004,13178dc5876a335f,192.168.97.141,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,team_wiki,email,success
+2025-10-01 15:46:39,E025,91c601315d7188df,10.37.137.41,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,jira_board,document,success
+2025-10-03 06:42:28,E005,3245ebae3cc1d8c2,192.168.212.251,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,timesheet,email,success
+2025-10-01 15:14:11,E008,acea84b7a988435e,192.168.78.167,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,upload_file,vpn_portal,document,success
+2025-10-01 13:10:03,E022,aca35d66d728f0e3,10.239.189.241,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,public_policy_doc,report,success
+2025-10-03 06:04:02,E036,42a0967ba89ac05a,192.168.109.132,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_file,timesheet,document,success
+2025-10-02 13:40:23,E021,977fd29a4bf5ff2c,10.164.18.91,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,crm_leads_view,document,success
+2025-10-01 10:39:20,E017,e96f903db14f33a3,10.144.199.130,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,intranet_home,dashboard,success
+2025-10-02 11:10:16,E007,8a513787cbec0a53,192.168.219.32,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,intranet_home,file_share,success
+2025-10-02 17:20:26,E035,22a38ce7f262738c,192.168.185.96,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,jira_board,document,failed
+2025-10-02 07:24:57,E038,cd7bca0e43ba60f1,10.201.204.99,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_profile,email_inbox,report,success
+2025-10-02 10:07:37,E009,96ad92065fd0010d,192.168.164.177,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,hr_personal_files,document,success
+2025-10-03 19:00:30,E028,27db2a4296af8f41,192.168.154.157,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,crm_leads_view,dashboard,success
+2025-10-02 10:16:37,E006,2c0cc12debfa99f3,192.168.72.91,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,crm_leads_view,report,success
+2025-10-01 13:37:26,E015,bdd3f5b83e0a2334,192.168.112.44,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,crm_leads_view,file_share,success
+2025-10-04 08:14:23,E014,44e1d2441a3f877f,10.190.65.106,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,vpn_portal,database,success
+2025-10-03 06:01:59,E007,251e3038cdbff5d3,10.167.161.210,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,project_docs_general,dashboard,success
+2025-10-01 14:15:16,E017,6844019036732a61,192.168.67.178,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,crm_leads_view,file_share,success
+2025-10-04 17:56:22,E032,6505c2373135e92d,10.138.1.244,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,edit_document,training_portal,file_share,success
+2025-10-05 00:29:34,E034,811392f22118151a,192.168.189.39,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_profile,training_portal,document,success
+2025-10-03 07:14:30,E020,51f16ae9de393407,97.96.164.135,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_confidential_document,admin_shared_folder,dashboard,success
+2025-10-03 07:24:06,E014,3383a1878e1d88ac,192.168.65.169,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,logout,jira_board,database,success
+2025-10-04 12:58:42,E032,7435609ff69552a4,187.2.248.73,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,multiple_password_resets,finance_reports_q3,database,success
+2025-10-04 13:47:37,E023,fd21fadf0ab65ab7,192.168.234.201,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,training_portal,email,success
+2025-10-05 15:03:56,E003,693bef77d1218123,192.168.247.184,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,salary_overview,email,success
+2025-10-02 13:45:53,E020,e9d7be4ad9223e0c,10.250.44.186,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,intranet_home,dashboard,success
+2025-10-05 17:00:31,E026,763f013379efe128,192.168.164.177,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,intranet_home,dashboard,success
+2025-10-02 15:36:48,E015,affb126f4207cee0,192.168.46.140,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,project_docs_general,dashboard,success
+2025-10-04 11:13:17,E040,a48ac1ee2852b7b1,82.240.174.94,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,mass_download,security_incident_reports,report,success
+2025-10-04 15:31:29,E011,0a3829560aaf54bc,192.168.138.10,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,project_docs_general,file_share,success
+2025-10-05 16:03:05,E026,92fe15f7b47c88a3,10.249.237.69,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,contracts_folder_confidential,dashboard,success
+2025-10-03 10:42:23,E029,13d10b007cf57cdb,192.168.118.86,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,multiple_password_resets,finance_reports_q3,file_share,success
+2025-10-05 13:18:12,E017,90f540e3621eda14,10.139.100.147,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,crm_leads_view,report,success
+2025-10-04 18:32:50,E005,9b9132cbc8c7b255,192.168.180.21,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,timesheet,report,success
+2025-10-02 15:32:16,E011,58e377fa42411d72,10.58.167.37,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,admin_shared_folder,document,success
+2025-10-04 10:35:44,E019,23b057a3cf8550c8,10.88.67.230,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,intranet_home,dashboard,success
+2025-10-04 09:28:37,E010,e160a1077d986f8d,192.168.25.252,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,timesheet,database,success
+2025-10-01 15:58:45,E027,bf700eabaf457154,62.120.129.209,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,finance_reports_q3,database,failed
+2025-10-03 13:19:12,E002,ff42c1579606a966,10.220.36.49,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,team_wiki,email,success
+2025-10-01 11:07:00,E002,676a99c6f4d595e4,192.168.244.31,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,edit_document,project_docs_general,file_share,success
+2025-10-01 07:41:18,E019,ed7647d323e106d1,192.168.29.198,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,crm_leads_view,database,success
+2025-10-01 06:00:29,E001,a555746f08e60f2a,192.168.146.150,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,upload_file,intranet_home,database,success
+2025-10-04 11:43:56,E016,8af2e72d777f687d,192.168.80.201,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,training_portal,dashboard,success
+2025-10-04 11:31:44,E035,f0a6502c6b59d276,10.216.19.8,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,intranet_home,database,failed
+2025-10-01 18:53:18,E001,b2a52451aee368f8,10.103.198.200,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_sensitive_file,finance_reports_q3,database,success
+2025-10-02 08:37:57,E028,eeda8e0231fce4fc,192.168.65.1,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,email_inbox,document,success
+2025-10-01 10:42:56,E016,eb2480b70e8931f5,10.253.140.98,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,finance_reports_q3,file_share,success
+2025-10-01 15:12:18,E018,d1d6f519709ac0a1,10.201.20.143,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,jira_board,email,success
+2025-10-03 12:36:26,E014,841094ca935dfd33,10.23.0.8,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,vpn_portal,report,success
+2025-10-03 10:51:02,E027,b256c3401b045fc8,10.184.42.1,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,crm_leads_view,report,success
+2025-10-04 08:13:32,E012,7f0cb18b270b181e,10.171.228.221,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,jira_board,email,success
+2025-10-01 08:40:56,E028,bc692407e9415ddc,10.17.24.224,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,project_docs_general,file_share,success
+2025-10-04 12:43:54,E017,2bef5a33ad40fb11,192.168.13.69,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,team_wiki,document,success
+2025-10-02 15:08:44,E037,9f0827cc1eea38bc,10.206.249.59,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,multiple_password_resets,admin_shared_folder,dashboard,failed
+2025-10-04 12:02:56,E014,d4ccc8e987a1f5fa,192.168.24.119,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,email_inbox,report,success
+2025-10-03 12:46:48,E003,a4374d9522558a14,192.168.143.243,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,update_profile,email_inbox,file_share,success
+2025-10-01 10:37:09,E006,3ae5b7db82a49f1e,10.122.50.107,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,jira_board,database,success
+2025-10-04 13:09:07,E021,7a66449f14cabf52,10.204.25.105,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,failed_login,jira_board,document,success
+2025-10-04 16:56:06,E025,9f384057549c5bfa,192.168.20.173,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,training_portal,email,success
+2025-10-02 08:21:55,E027,156505d3187a3371,10.28.209.119,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,vpn_portal,document,success
+2025-10-04 05:13:07,E032,8f9fb0b46973088f,192.168.40.75,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,update_profile,timesheet,dashboard,success
+2025-10-03 13:35:24,E026,8849ec4fb4d7025d,10.2.139.85,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,public_policy_doc,database,success
+2025-10-03 11:52:14,E028,b86ce9000577266c,192.168.201.251,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,public_policy_doc,document,success
+2025-10-02 14:25:29,E038,b2d464e087eab1c8,159.2.198.124,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,finance_reports_q3,report,success
+2025-10-04 17:43:14,E018,0f4ff3fe289eee4e,10.91.138.192,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,email_inbox,email,success
+2025-10-02 06:37:34,E010,f93451e0f621f264,192.168.243.29,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,jira_board,database,failed
+2025-10-01 07:01:10,E012,d25f671441744758,10.50.65.248,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,timesheet,dashboard,success
+2025-10-05 12:29:21,E004,4d994694b41d1866,192.168.142.221,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,public_policy_doc,document,success
+2025-10-01 21:07:36,E005,453dd020589b87c8,10.9.218.206,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,training_portal,document,success
+2025-10-04 06:04:07,E020,a296263211c8184c,10.207.85.253,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,training_portal,document,success
+2025-10-05 11:55:54,E006,f879d808d4270ef9,192.168.207.178,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,login_outside_work_hours,all_contracts_archive,file_share,success
+2025-10-02 13:18:34,E025,fc4871059cb9284a,192.168.190.176,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,update_profile,team_wiki,dashboard,success
+2025-10-04 07:35:33,E005,bd92aa665fbd10b0,10.133.129.148,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,team_wiki,file_share,success
+2025-10-04 08:30:19,E018,277290423f535e2a,22.75.195.145,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,bulk_export,credentials_vault_backup,report,success
+2025-10-03 10:01:02,E035,74aa0f703e63720f,117.8.121.213,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_sensitive_file,full_salary_export,database,success
+2025-10-01 11:04:16,E028,c343325153382cc5,150.170.71.38,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,share_confidential_link,finance_reports_q3,dashboard,success
+2025-10-05 11:14:53,E027,7386f867c3bd0e8f,10.207.30.157,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,project_docs_general,email,failed
+2025-10-05 13:53:01,E030,7906c68657dae194,192.168.199.84,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,project_docs_general,document,success
+2025-10-05 14:32:53,E004,b2b17cf15387ce02,192.168.152.32,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,login,public_policy_doc,dashboard,success
+2025-10-02 17:42:55,E013,f58a2e479c3f4374,192.168.62.168,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,intranet_home,document,success
+2025-10-03 18:27:56,E025,25b7f5f397056d43,10.123.72.32,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,training_portal,email,success
+2025-10-05 08:23:14,E038,d36e7c276079ad0b,192.168.103.11,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,access_restricted_folder,security_incident_reports,database,success
+2025-10-05 11:04:54,E029,61c06a1585f298ad,192.168.32.87,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_report,email_inbox,file_share,success
+2025-10-03 16:36:12,E027,d5e2bdf680832443,10.176.67.54,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,intranet_home,report,success
+2025-10-04 09:13:40,E037,5e9f3f9e570829f3,10.234.134.65,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,training_portal,report,success
+2025-10-01 14:14:18,E040,8201ad536b95b56c,192.168.17.208,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,bulk_export,board_meetings_minutes_full,document,success
+2025-10-01 16:49:46,E019,258c91ecbaf1ab3c,10.190.62.18,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,login,email_inbox,database,success
+2025-10-04 14:08:24,E026,d19e4f8067026102,10.190.244.60,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,logout,intranet_home,dashboard,success
+2025-10-04 15:17:47,E006,182281fd51e3841f,192.168.219.187,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,jira_board,dashboard,success
+2025-10-01 09:00:17,E031,af1676b2cf23194f,192.168.110.162,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,public_policy_doc,email,success
+2025-10-02 09:34:20,E005,65d8f18128c27147,192.168.144.147,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,project_docs_general,file_share,success
+2025-10-05 16:59:40,E006,d15bc22b884b2c6d,192.168.166.95,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,disable_audit_logs,customer_db_dump,email,success
+2025-10-04 18:21:48,E009,36d6b93402c5ea26,10.183.144.229,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,team_wiki,report,success
+2025-10-05 00:56:04,E040,b2abd80486fd5066,72.34.5.77,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,multiple_password_resets,intranet_home,email,success
+2025-10-04 16:15:28,E032,aa7505b0e0d76dae,10.37.166.191,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_document,timesheet,email,success
+2025-10-02 08:47:43,E013,4c30cb7d98b2ab06,10.130.15.99,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,project_docs_general,database,success
+2025-10-04 11:59:28,E040,bb68afe733b642ae,10.122.24.46,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,timesheet,dashboard,success
+2025-10-04 03:22:41,E029,a0dd66a8cb54d368,10.129.143.13,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_document,intranet_home,report,success
+2025-10-02 14:39:41,E029,117e66f6d67ebc07,192.168.82.177,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,jira_board,document,success
+2025-10-03 15:52:02,E034,217a2cff585db4b2,192.168.38.226,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,intranet_home,database,success
+2025-10-04 23:21:32,E040,7bec3d8a31bfac4a,10.144.70.240,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,access_restricted_folder,project_docs_general,document,success
+2025-10-05 11:22:58,E010,3b56489f7e47f768,192.168.138.134,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,vpn_portal,database,success
+2025-10-02 12:57:38,E036,89e3a484488b0b09,192.168.250.22,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,login,project_docs_general,dashboard,success
+2025-10-01 18:28:15,E027,95a9252da901973c,192.168.141.249,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,update_profile,team_wiki,dashboard,success
+2025-10-02 15:01:57,E008,9cd24c0798b8d78d,192.168.121.248,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_report,jira_board,file_share,failed
+2025-10-04 08:47:58,E018,d5f7500015756ee6,10.13.50.232,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,crm_leads_view,document,success
+2025-10-05 03:42:28,E009,19aa7d1adff149e2,118.244.8.11,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,finance_reports_q3,database,success
+2025-10-01 15:17:51,E015,3fa564115726fc07,10.187.247.19,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,crm_leads_view,report,success
+2025-10-01 17:36:19,E025,68164991947e3bbf,192.168.65.3,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,search,jira_board,document,success
+2025-10-01 08:48:46,E008,93a394dadb3b27a4,192.168.164.32,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,project_docs_general,document,success
+2025-10-03 06:08:30,E025,db03218cd2814565,10.132.113.2,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,jira_board,report,success
+2025-10-03 02:01:48,E023,5b170444af38d953,192.168.236.11,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,crm_leads_view,database,success
+2025-10-05 09:49:04,E025,0ce94c75d40294d6,10.196.212.145,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,timesheet,document,success
+2025-10-03 16:14:27,E036,2b9ac05b05c47ca4,192.168.172.192,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,intranet_home,document,success
+2025-10-02 08:56:27,E030,3e26a0f906e98c3a,192.168.141.192,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,login,team_wiki,report,success
+2025-10-05 17:20:07,E010,14c1b051d2cafc2b,192.168.213.82,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,update_profile,email_inbox,file_share,success
+2025-10-02 09:50:32,E038,18e8a88fc2e9e601,192.168.92.148,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_document,timesheet,document,success
+2025-10-05 13:15:26,E040,f674d80e9f2530f3,192.168.71.57,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,project_docs_general,document,success
+2025-10-04 10:38:28,E019,25ce01e20f11aa4d,10.206.55.133,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,vpn_portal,database,success
+2025-10-05 10:15:40,E015,749b1a7a85773568,10.32.231.165,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,jira_board,database,success
+2025-10-03 18:13:06,E019,7850c343fb9fa991,10.121.49.236,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,view_document,email_inbox,report,success
+2025-10-02 04:56:10,E040,36429b0dbc54ecfa,10.124.240.194,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,logout,project_docs_general,file_share,success
+2025-10-05 14:23:46,E020,07cfdee873fb65a6,10.129.50.193,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_profile,intranet_home,report,failed
+2025-10-01 15:27:25,E008,49e2910f27943c94,192.168.115.60,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_document,project_docs_general,file_share,success
+2025-10-02 07:18:07,E040,76ce8f5050be1dce,71.239.208.200,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_sensitive_file,customer_db_dump,file_share,success
+2025-10-02 06:43:43,E008,9360240d8910c857,10.116.100.90,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,public_policy_doc,dashboard,success
+2025-10-03 17:56:54,E015,d6644bf1b2865c7c,192.168.75.254,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,vpn_portal,dashboard,success
+2025-10-05 18:59:05,E008,07be13083bff692c,192.168.109.135,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,failed_login,hr_personal_files,email,success
+2025-10-03 10:37:55,E023,5fb2a685141b6929,192.168.73.72,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,login,public_policy_doc,document,success
+2025-10-04 16:42:10,E013,63a8d482b8132e40,10.90.247.97,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_confidential_document,project_docs_general,email,success
+2025-10-01 14:53:32,E016,25e65791698a1f19,192.168.81.223,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,vpn_portal,report,success
+2025-10-04 08:52:32,E024,c895d8010875a88b,10.103.218.179,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,timesheet,document,failed
+2025-10-01 16:26:32,E023,2a01c668643e90a7,10.122.146.42,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,update_profile,email_inbox,document,success
+2025-10-02 11:16:32,E004,9bbb4e02608b07a8,192.168.206.151,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,team_wiki,report,success
+2025-10-01 08:40:35,E038,984b76fe901eee36,10.178.231.254,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,jira_board,file_share,success
+2025-10-02 10:25:13,E033,6f0a41ddb0f16e90,104.167.15.100,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,export_confidential_dataset,salary_overview,file_share,success
+2025-10-01 02:21:14,E019,e98de6e5782bf8e8,10.149.104.227,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,intranet_home,document,success
+2025-10-03 14:17:58,E005,6e89d41cb0789047,192.168.38.88,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,logout,crm_leads_view,database,success
+2025-10-05 15:03:43,E012,a4b6157e75468d9d,10.34.86.82,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,multiple_password_resets,client_kpi_detailed,document,success
+2025-10-01 07:32:03,E007,32cba9bdde542d11,192.168.154.209,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,project_docs_general,document,success
+2025-10-01 20:57:52,E030,e67199217f2c4dba,10.139.5.41,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_profile,crm_leads_view,dashboard,success
+2025-10-01 09:08:10,E001,585872635c85aa19,10.246.28.122,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,public_policy_doc,report,success
+2025-10-04 08:16:02,E013,241d2803ec1ccbff,10.17.17.104,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,update_profile,crm_leads_view,email,success
+2025-10-01 09:58:30,E012,66dedb5a7485f3a6,10.21.27.179,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,jira_board,document,success
+2025-10-02 15:07:25,E035,6f420b2e79da0982,192.168.67.97,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,upload_file,vpn_portal,database,success
+2025-10-03 10:22:14,E012,ae2fa8fdba08a780,10.9.53.201,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,project_docs_general,document,success
+2025-10-03 14:08:10,E006,2ee7a2ac6b43f6c2,192.168.119.54,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,edit_document,timesheet,email,success
+2025-10-01 17:00:21,E002,a2290ca57cacdfcb,10.42.141.181,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,download_file,intranet_home,dashboard,success
+2025-10-03 22:25:45,E029,5615e67edf74e345,192.168.47.95,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_full_database,security_incident_reports,dashboard,success
+2025-10-01 07:49:02,E021,759bba50f61af51e,38.87.48.131,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,vpn_portal,document,failed
+2025-10-04 12:18:16,E025,61089e06dfd5e254,10.47.91.85,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,training_portal,file_share,success
+2025-10-04 07:45:25,E030,9928897fa7f13daa,192.168.7.239,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,jira_board,document,success
+2025-10-03 08:21:56,E012,4002f0c86417b98b,10.108.227.217,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,search,crm_leads_view,database,success
+2025-10-02 10:45:24,E022,1cc1e6399a896fea,10.125.253.224,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_document,vpn_portal,dashboard,success
+2025-10-03 17:30:14,E010,e26ea10064bfecad,10.182.125.241,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_profile,project_docs_general,database,failed
+2025-10-03 09:43:54,E039,a4d4e5d68f98aa7c,192.168.58.248,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,team_wiki,email,success
+2025-10-01 03:29:18,E028,d97776cdbf3a598b,192.168.242.74,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_profile,team_wiki,report,success
+2025-10-04 11:56:14,E033,3e03b16cf390c50c,192.168.68.155,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,client_kpi_detailed,document,failed
+2025-10-01 08:36:28,E015,b7f0affc8a8ccfbf,10.70.46.240,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,access_restricted_folder,project_docs_general,database,failed
+2025-10-04 13:50:53,E005,32a4ad06d074b318,10.170.4.14,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,download_file,vpn_portal,dashboard,success
+2025-10-05 08:18:47,E015,5c9a602ade190619,10.87.247.117,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,vpn_portal,file_share,success
+2025-10-03 10:13:14,E024,41486d0d430513f5,192.168.183.217,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,download_file,email_inbox,file_share,success
+2025-10-05 14:02:02,E037,44318f98ad7da742,171.82.194.238,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,security_incident_reports,email,success
+2025-10-04 10:26:36,E013,9b6e93bbbd645b00,192.168.151.206,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,intranet_home,report,success
+2025-10-02 10:04:07,E014,7dd6b75a977ecc6a,10.5.190.184,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,logout,finance_reports_q3,report,failed
+2025-10-03 12:29:38,E025,70a85d0bb5256b00,10.227.109.82,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,public_policy_doc,report,success
+2025-10-03 09:07:59,E011,31e0a07e9871b9ef,10.101.152.83,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,intranet_home,dashboard,success
+2025-10-05 09:43:04,E001,4088e151fc5d29d9,10.42.244.106,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,edit_document,jira_board,document,failed
+2025-10-01 10:00:16,E021,b4fad1f88581d61b,10.66.238.29,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,update_profile,timesheet,email,success
+2025-10-02 13:55:17,E028,c660ec7685556e1a,132.235.54.85,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,export_confidential_dataset,full_salary_export,email,success
+2025-10-01 07:44:30,E008,2e0f339fc60f8f33,10.75.27.73,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,search,timesheet,database,success
+2025-10-03 08:50:31,E014,e66fd09ea77c32cd,192.168.81.140,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0,edit_document,timesheet,dashboard,success
+2025-10-05 20:16:25,E009,422cd330ffc2e282,10.108.229.128,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,email_inbox,dashboard,success
+2025-10-04 11:05:16,E023,c5a46ac0597a6cda,192.168.219.213,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,timesheet,dashboard,success
+2025-10-04 11:55:48,E004,1b0594a9ba3d34e2,10.70.89.140,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,upload_file,training_portal,dashboard,success
+2025-10-01 10:43:58,E021,b5a851e07886e307,192.168.60.165,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,crm_leads_view,document,success
+2025-10-01 15:34:31,E033,4adaa9f6420c4291,192.168.156.89,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,vpn_portal,dashboard,success
+2025-10-04 11:04:29,E009,8fd2d5bb0cb18485,192.168.31.238,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,team_wiki,file_share,success
+2025-10-03 06:50:39,E023,e7d15324fa78814a,10.235.67.15,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_profile,training_portal,dashboard,success
+2025-10-05 12:31:18,E019,f27a9af96f02b44c,192.168.234.8,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,login,vpn_portal,email,success
+2025-10-03 15:03:47,E028,d3b60bc3a0f9706f,10.83.69.88,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,update_profile,intranet_home,file_share,success
+2025-10-02 07:40:22,E012,b322eef19689276c,10.10.239.110,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,project_docs_general,document,success
+2025-10-03 14:59:24,E012,df8476d693b47de0,192.168.171.65,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,project_docs_general,email,success
+2025-10-03 10:51:05,E035,065970ab88c08347,192.168.209.56,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_report,intranet_home,database,success
+2025-10-05 16:21:14,E008,d6dfabd2c165d5e5,192.168.5.27,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,update_profile,project_docs_general,document,success
+2025-10-04 12:13:40,E038,cbfd1b4075cf213e,165.9.211.1,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,logout,jira_board,document,success
+2025-10-04 20:34:24,E020,44f9bc22571f424b,192.168.101.147,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_report,jira_board,file_share,failed
+2025-10-01 12:47:11,E030,db8c051152a2cd71,10.141.24.1,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,upload_file,project_docs_general,file_share,success
+2025-10-02 15:48:37,E019,c085e8b0f5c116f0,10.158.141.97,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,search,crm_leads_view,email,success
+2025-10-01 08:18:54,E011,de5981dbf382a50a,192.168.102.195,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,team_wiki,dashboard,success
+2025-10-04 14:51:14,E014,7da7a9028c722a82,10.160.21.75,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,jira_board,dashboard,success
+2025-10-01 11:36:11,E034,63ad6618b781af3b,10.136.0.248,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,view_profile,vpn_portal,file_share,success
+2025-10-01 10:05:12,E035,5d727aa2f81b4025,192.168.38.201,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0,view_profile,jira_board,email,success
+2025-10-04 21:32:06,E038,8d6e3eb5d793bde0,192.168.145.143,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,timesheet,dashboard,success
+2025-10-02 18:58:21,E038,9759ed55cba6fa95,10.28.107.243,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,download_file,timesheet,report,success
+2025-10-03 11:15:26,E024,9d22d319732cd97e,10.111.9.115,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,upload_file,finance_reports_q3,document,success
+2025-10-02 23:53:24,E033,debf64c46490b29b,192.168.198.249,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,disable_audit_logs,all_contracts_archive,dashboard,success
+2025-10-05 21:03:57,E035,c91ab548bc20ffb4,192.168.169.216,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,download_file,crm_leads_view,document,success
+2025-10-03 15:58:37,E014,2babc2f974c1fae2,10.23.163.225,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,vpn_portal,document,success
+2025-10-02 15:27:20,E035,7c227b4b74fa5450,158.245.46.58,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,access_restricted_folder,hr_personal_files,dashboard,success
+2025-10-02 16:11:16,E010,77d4d6f5b237c3a6,192.168.226.122,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,export_confidential_dataset,contracts_folder_confidential,email,success
+2025-10-04 14:29:09,E036,c185090612503c5f,192.168.140.40,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,logout,email_inbox,file_share,success
+2025-10-02 23:51:27,E008,12c547acf0655058,10.29.124.183,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15,edit_document,email_inbox,email,success
+2025-10-03 09:06:51,E011,f6b86c1380961710,192.168.100.124,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,view_profile,vpn_portal,document,success
+2025-10-01 06:46:31,E006,4c3691600a2e2e31,192.168.132.54,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,login,vpn_portal,database,failed
+2025-10-01 14:01:14,E030,82e02213e997e12c,192.168.71.211,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login,intranet_home,file_share,success
+2025-10-03 16:51:06,E026,3cb8935baa77f2bb,43.215.162.254,Mozilla/5.0 (X11; Linux x86_64) Firefox/119.0,multiple_password_resets,all_contracts_archive,report,success
+2025-10-03 10:29:55,E017,a97ab2507cd59248,192.168.219.167,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,search,vpn_portal,email,success
+2025-10-03 19:02:08,E019,0edd0e60f86b68e9,10.182.49.125,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,view_report,jira_board,database,success
+2025-10-01 07:39:01,E028,433d412fba306b71,192.168.66.61,Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) Mobile,login_outside_work_hours,client_kpi_detailed,database,success
