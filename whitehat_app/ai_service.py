@@ -10,10 +10,10 @@ class GraniteAIService:
         # Read from environment variables, with fallback to default
         self.api_url = os.getenv(
             'AI_API_URL',
-            "http://granite-7b-lab-white-hat.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com/v1/chat/completions"
+            "https://granite-3b-white-hat-project.apps.cluster-xdhbp.xdhbp.sandbox1403.opentlc.com/v1/chat/completions"
         )
         self.api_token = os.getenv('AI_API_TOKEN', None)
-        self.model = os.getenv('AI_MODEL_NAME', "granite-7b-lab")
+        self.model = os.getenv('AI_MODEL_NAME', "granite-3b")
         self.timeout = int(os.getenv('AI_TIMEOUT', 60))
         
         # Prepare headers with authentication if token is provided
