@@ -99,14 +99,14 @@ class IncidentCreateSerializer(serializers.Serializer):
     user_id = serializers.UUIDField()
     incident_type = serializers.CharField()
     severity = serializers.ChoiceField(
-        choices=['LOW', 'MEDIUM', 'CRITICAL']
+        choices=Incident.SEVERITY_CHOICES
     )
 
 
 class IncidentUpdateSerializer(serializers.Serializer):
     incident_type = serializers.CharField(required=False)
     severity = serializers.ChoiceField(
-        choices=['LOW', 'MEDIUM', 'CRITICAL'],
+        choices=Incident.SEVERITY_CHOICES,
         required=False
     )
 

@@ -6,7 +6,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 
 from whitehat_app.models import Agent, FileUpload, OfflineEvent, User, Incident, Event
 from whitehat_app.minio_service import minio_service
@@ -336,12 +337,13 @@ def offline_queue(request):
 
 @extend_schema(
     parameters=[
-        {
-            'name': 'agent_id',
-            'in': 'query',
-            'required': True,
-            'schema': {'type': 'string'}
-        }
+        OpenApiParameter(
+            name='agent_id',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            required=True,
+            description='Agent ID to retrieve commands for'
+        )
     ],
     responses={200: {'description': 'Agent commands retrieved'}}
 )
@@ -374,12 +376,13 @@ def get_commands(request):
 
 @extend_schema(
     parameters=[
-        {
-            'name': 'agent_id',
-            'in': 'query',
-            'required': True,
-            'schema': {'type': 'string'}
-        }
+        OpenApiParameter(
+            name='agent_id',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            required=True,
+            description='Agent ID to retrieve whitelist for'
+        )
     ],
     responses={200: {'description': 'Whitelist retrieved'}}
 )
@@ -412,12 +415,13 @@ def get_whitelist(request):
 
 @extend_schema(
     parameters=[
-        {
-            'name': 'agent_id',
-            'in': 'query',
-            'required': True,
-            'schema': {'type': 'string'}
-        }
+        OpenApiParameter(
+            name='agent_id',
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.QUERY,
+            required=True,
+            description='Agent ID to retrieve configuration for'
+        )
     ],
     responses={200: {'description': 'Agent configuration retrieved'}}
 )

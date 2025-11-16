@@ -3,6 +3,14 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 
+# Common severity/risk level choices used across multiple models
+SEVERITY_RISK_CHOICES = [
+    ('LOW', 'Low'),
+    ('MEDIUM', 'Medium'),
+    ('CRITICAL', 'Critical'),
+]
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -20,11 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    RISK_LEVELS = [
-        ('LOW', 'Low'),
-        ('MEDIUM', 'Medium'),
-        ('CRITICAL', 'Critical'),
-    ]
+    RISK_LEVELS = SEVERITY_RISK_CHOICES
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True, max_length=255)
@@ -98,11 +102,7 @@ class Event(models.Model):
 
 
 class Incident(models.Model):
-    SEVERITY_CHOICES = [
-        ('LOW', 'Low'),
-        ('MEDIUM', 'Medium'),
-        ('CRITICAL', 'Critical'),
-    ]
+    SEVERITY_CHOICES = SEVERITY_RISK_CHOICES
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)

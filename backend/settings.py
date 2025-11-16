@@ -166,7 +166,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -181,8 +180,7 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'ENUM_NAME_OVERRIDES': {
-        'RiskLevelEnum': 'whitehat_app.models.User.RISK_LEVELS',
-        'SeverityEnum': 'whitehat_app.models.Incident.SEVERITY_CHOICES',
+        'SeverityRiskEnum': 'whitehat_app.models.SEVERITY_RISK_CHOICES',
     },
 }
 
