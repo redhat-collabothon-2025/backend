@@ -1,9 +1,11 @@
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.test import RequestFactory
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from whitehat_app.models import Campaign, User
@@ -88,13 +90,18 @@ class CampaignViewSet(viewsets.ModelViewSet):
         random_users = list(random_users_qs[:4])
 
         recipients = random_users + [fixed_user]
+
+        # Send phishing email to each recipient
+        factory = RequestFactory()
         for user in recipients:
-            send_phishing_email(
-                user_id=user.id,
-                campaign_id=campaign.id,
-                template_type=template_type,
-                tracking_enabled=true,
-            )
+            drf_request = Request(factory.post('/api/emails/send-phishing/', {
+                'user_id': str(user.id),
+                'campaign_id': str(campaign.id),
+                'template_type': 'linkedin',
+                'tracking_enabled': True,
+            }))
+            drf_request.user = request.user
+            send_phishing_email(drf_request)
 
         serializer = self.get_serializer(campaign)
         return Response(serializer.data)
