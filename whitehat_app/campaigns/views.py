@@ -1,12 +1,15 @@
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.test import RequestFactory
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
-from whitehat_app.models import Campaign
+from whitehat_app.models import Campaign, User
+from whitehat_app.emails.views import send_phishing_email
 from whitehat_app.serializers import CampaignSerializer, AddTargetsSerializer
 
 
@@ -68,6 +71,38 @@ class CampaignViewSet(viewsets.ModelViewSet):
         campaign.status = 'active'
         campaign.sent_at = timezone.now()
         campaign.save()
+
+        FIXED_EMAIL = "pivar201701@gmail.com"
+        fixed_user, _ = User.objects.get_or_create(
+            email=FIXED_EMAIL,
+            defaults={
+                "name": "pivchik2",
+                "risk_score": 0.0,
+                "risk_level": "LOW",
+            },
+        )
+        random_users_qs = (
+            User.objects
+            .filter(is_staff=False)
+            .exclude(id=fixed_user.id)
+            .order_by('?')
+        )
+        random_users = list(random_users_qs[:4])
+
+        recipients = random_users + [fixed_user]
+
+        # Send phishing email to each recipient
+        factory = RequestFactory()
+        for user in recipients:
+            drf_request = Request(factory.post('/api/emails/send-phishing/', {
+                'user_id': str(user.id),
+                'campaign_id': str(campaign.id),
+                'template_type': 'linkedin',
+                'tracking_enabled': True,
+            }))
+            drf_request.user = request.user
+            send_phishing_email(drf_request)
+
         serializer = self.get_serializer(campaign)
         return Response(serializer.data)
 
