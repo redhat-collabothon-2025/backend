@@ -1,6 +1,7 @@
 import time
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -25,6 +26,7 @@ from whitehat_app.minio_service import minio_service
     },
     responses={200: {'description': 'Heartbeat received'}}
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def heartbeat(request):
@@ -103,17 +105,23 @@ def heartbeat(request):
         }
     }
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def request_upload(request):
     try:
         data = request.data
         agent_id = data.get('agent_id')
-        file_path = data.get('file_path')
+        filename = data.get('filename')
         file_size = data.get('file_size')
-        file_hash = data.get('file_hash')
+        category = data.get('category', 'unknown')
+        metadata = data.get('metadata', {})
 
-        if not all([agent_id, file_path, file_size, file_hash]):
+        # Support both old and new parameter names
+        file_path = data.get('file_path') or metadata.get('original_path') or filename
+        file_hash = data.get('file_hash') or metadata.get('hash', '')
+
+        if not all([agent_id, filename, file_size]):
             return Response(
                 {'error': 'missing_fields'},
                 status=status.HTTP_400_BAD_REQUEST
@@ -127,12 +135,12 @@ def request_upload(request):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        upload_id = f"upload_{int(time.time())}"
-        object_name = f"agents/{agent_id}/{file_hash}.enc"
+        upload_id = f"upload_{agent_id}_{int(time.time())}"
+        object_name = f"agents/{agent_id}/{category}/{filename}"
 
-        upload_url = minio_service.get_upload_url(object_name)
+        presigned_url = minio_service.get_upload_url(object_name)
 
-        if not upload_url:
+        if not presigned_url:
             return Response(
                 {
                     'upload_id': upload_id,
@@ -148,7 +156,7 @@ def request_upload(request):
             file_path=file_path,
             file_size=file_size,
             file_hash=file_hash,
-            minio_url=upload_url,
+            minio_url=presigned_url,
             bucket=minio_service.bucket,
             object_name=object_name,
             status='pending'
@@ -156,7 +164,7 @@ def request_upload(request):
 
         return Response({
             'upload_id': upload_id,
-            'upload_url': upload_url
+            'presigned_url': presigned_url
         }, status=status.HTTP_200_OK)
 
     except Exception as e:
@@ -164,7 +172,7 @@ def request_upload(request):
             {
                 'upload_id': f"upload_{int(time.time())}",
                 'success': False,
-                'error': 'connection_error'
+                'error': str(e)
             },
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
@@ -196,12 +204,16 @@ def request_upload(request):
         }
     }
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def complete_upload(request):
     try:
         data = request.data
+        agent_id = data.get('agent_id')
         upload_id = data.get('upload_id')
+        success = data.get('success', False)
+        error = data.get('error')
 
         if not upload_id:
             return Response(
@@ -225,7 +237,8 @@ def complete_upload(request):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        if minio_service.file_exists(file_upload.object_name):
+        if success:
+            # Agent reports successful upload
             file_upload.status = 'completed'
             file_upload.completed_at = timezone.now()
             file_upload.save()
@@ -235,21 +248,23 @@ def complete_upload(request):
                 'success': True
             }, status=status.HTTP_200_OK)
         else:
+            # Agent reports failed upload
             file_upload.status = 'failed'
+            file_upload.error_message = error or 'Unknown error'
             file_upload.save()
 
             return Response({
                 'upload_id': upload_id,
                 'success': False,
-                'error': 'file_not_found'
-            }, status=status.HTTP_404_NOT_FOUND)
+                'error': error or 'upload_failed'
+            }, status=status.HTTP_200_OK)
 
     except Exception as e:
         return Response(
             {
                 'upload_id': upload_id if 'upload_id' in locals() else 'unknown',
                 'success': False,
-                'error': 'connection_error'
+                'error': str(e)
             },
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
@@ -276,6 +291,7 @@ def complete_upload(request):
     },
     responses={200: {'description': 'Offline events queued'}}
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def offline_queue(request):
@@ -329,6 +345,7 @@ def offline_queue(request):
     ],
     responses={200: {'description': 'Agent commands retrieved'}}
 )
+@csrf_exempt
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_commands(request):
@@ -366,6 +383,7 @@ def get_commands(request):
     ],
     responses={200: {'description': 'Whitelist retrieved'}}
 )
+@csrf_exempt
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_whitelist(request):
@@ -403,6 +421,7 @@ def get_whitelist(request):
     ],
     responses={200: {'description': 'Agent configuration retrieved'}}
 )
+@csrf_exempt
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_agent_config(request):
@@ -465,6 +484,7 @@ def get_agent_config(request):
     },
     responses={200: {'description': 'USB event processed, file actions returned'}}
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def usb_event(request):
@@ -535,6 +555,7 @@ def usb_event(request):
     },
     responses={200: {'description': 'Tamper alert received'}}
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def tamper_alert(request):
@@ -597,6 +618,7 @@ def tamper_alert(request):
     },
     responses={200: {'description': 'Insider alert received'}}
 )
+@csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def insider_alert(request):

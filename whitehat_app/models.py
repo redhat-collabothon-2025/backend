@@ -167,6 +167,7 @@ class FileUpload(models.Model):
     bucket = models.CharField(max_length=255)
     object_name = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    error_message = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
 
