@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-from whitehat_app.models import User, Campaign, Event, Incident, RiskHistory, Log
+from whitehat_app.models import (
+    User, Campaign, Event, Incident, RiskHistory, Log,
+    Agent, FileUpload, OfflineEvent
+)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -115,3 +118,45 @@ class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
         fields = '__all__'
+
+
+class AgentSerializer(serializers.ModelSerializer):
+    user_email = serializers.EmailField(source='user.email', read_only=True)
+    user_name = serializers.CharField(source='user.name', read_only=True)
+    user_risk_level = serializers.CharField(source='user.risk_level', read_only=True)
+
+    class Meta:
+        model = Agent
+        fields = [
+            'agent_id', 'user', 'user_email', 'user_name', 'user_risk_level',
+            'hostname', 'os_type', 'ip_address', 'status',
+            'last_heartbeat', 'created_at'
+        ]
+        read_only_fields = ['agent_id', 'last_heartbeat', 'created_at']
+
+
+class FileUploadSerializer(serializers.ModelSerializer):
+    agent_hostname = serializers.CharField(source='agent.hostname', read_only=True)
+    agent_user_email = serializers.CharField(source='agent.user.email', read_only=True)
+
+    class Meta:
+        model = FileUpload
+        fields = [
+            'upload_id', 'agent', 'agent_hostname', 'agent_user_email',
+            'file_path', 'file_size', 'file_hash', 'bucket', 'object_name',
+            'status', 'error_message', 'created_at', 'completed_at'
+        ]
+        read_only_fields = ['upload_id', 'created_at', 'completed_at']
+
+
+class OfflineEventSerializer(serializers.ModelSerializer):
+    agent_hostname = serializers.CharField(source='agent.hostname', read_only=True)
+    agent_id = serializers.CharField(source='agent.agent_id', read_only=True)
+
+    class Meta:
+        model = OfflineEvent
+        fields = [
+            'id', 'agent', 'agent_id', 'agent_hostname',
+            'event_type', 'payload', 'timestamp', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
