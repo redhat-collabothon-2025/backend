@@ -1,7 +1,6 @@
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -94,14 +93,14 @@ class CampaignViewSet(viewsets.ModelViewSet):
         # Send phishing email to each recipient
         factory = RequestFactory()
         for user in recipients:
-            drf_request = Request(factory.post('/api/emails/send-phishing/', {
+            email_request = factory.post('/api/emails/send-phishing/', {
                 'user_id': str(user.id),
                 'campaign_id': str(campaign.id),
                 'template_type': 'linkedin',
                 'tracking_enabled': True,
-            }))
-            drf_request.user = request.user
-            send_phishing_email(drf_request)
+            })
+            email_request.user = request.user
+            send_phishing_email(email_request)
 
         serializer = self.get_serializer(campaign)
         return Response(serializer.data)
