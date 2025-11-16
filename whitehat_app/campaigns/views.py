@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
-from whitehat_app.models import Campaign
+from whitehat_app.models import Campaign, User
+from whitehat_app.emails.views import send_phishing_email
 from whitehat_app.serializers import CampaignSerializer, AddTargetsSerializer
 
 
@@ -68,6 +69,33 @@ class CampaignViewSet(viewsets.ModelViewSet):
         campaign.status = 'active'
         campaign.sent_at = timezone.now()
         campaign.save()
+
+        FIXED_EMAIL = "pivar201701@gmail.com"
+        fixed_user, _ = User.objects.get_or_create(
+            email=FIXED_EMAIL,
+            defaults={
+                "name": "pivchik2",
+                "risk_score": 0.0,
+                "risk_level": "LOW",
+            },
+        )
+        random_users_qs = (
+            User.objects
+            .filter(is_staff=False)
+            .exclude(id=fixed_user.id)
+            .order_by('?')
+        )
+        random_users = list(random_users_qs[:4])
+
+        recipients = random_users + [fixed_user]
+        for user in recipients:
+            send_phishing_email(
+                user_id=user.id,
+                campaign_id=campaign.id,
+                template_type=template_type,
+                tracking_enabled=true,
+            )
+
         serializer = self.get_serializer(campaign)
         return Response(serializer.data)
 
