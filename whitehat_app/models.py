@@ -74,7 +74,7 @@ class Campaign(models.Model):
     scenario = models.CharField(max_length=255)
     target_count = models.IntegerField()
     click_count = models.IntegerField(default=0)
-    sent_at = models.DateTimeField()
+    sent_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='draft')
 
     def __str__(self):
