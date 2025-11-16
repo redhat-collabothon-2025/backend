@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 
-from whitehat_app.models import Agent, FileUpload, OfflineEvent, User
+from whitehat_app.models import Agent, FileUpload, OfflineEvent, User, Incident, Event
 from whitehat_app.minio_service import minio_service
 
 
@@ -513,6 +513,137 @@ def usb_event(request):
         return Response({
             'default_action': 'allow',
             'file_actions': file_actions
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@extend_schema(
+    request={
+        'application/json': {
+            'type': 'object',
+            'properties': {
+                'agent_id': {'type': 'string'},
+                'timestamp': {'type': 'integer'},
+                'detail': {'type': 'string'}
+            }
+        }
+    },
+    responses={200: {'description': 'Tamper alert received'}}
+)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def tamper_alert(request):
+    """Process tamper detection alert from agent"""
+    try:
+        data = request.data
+        agent_id = data.get('agent_id')
+        detail = data.get('detail')
+        timestamp = data.get('timestamp')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Verify agent exists
+        try:
+            agent = Agent.objects.get(agent_id=agent_id)
+        except Agent.DoesNotExist:
+            return Response(
+                {'error': 'agent_not_found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Update agent status to suspicious
+        agent.status = 'suspicious'
+        agent.save()
+
+        # Create an incident for tamper detection
+        Incident.objects.create(
+            user=agent.user,
+            incident_type=f'Tamper Detection: {detail}',
+            severity='CRITICAL'
+        )
+
+        return Response({
+            'status': 'ok',
+            'message': 'Tamper alert recorded'
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@extend_schema(
+    request={
+        'application/json': {
+            'type': 'object',
+            'properties': {
+                'agent_id': {'type': 'string'},
+                'event_type': {'type': 'string'},
+                'details': {'type': 'object'},
+                'timestamp': {'type': 'integer'}
+            }
+        }
+    },
+    responses={200: {'description': 'Insider alert received'}}
+)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def insider_alert(request):
+    """Process insider threat alert from agent"""
+    try:
+        data = request.data
+        agent_id = data.get('agent_id')
+        event_type = data.get('event_type')
+        details = data.get('details', {})
+        timestamp = data.get('timestamp')
+
+        if not agent_id:
+            return Response(
+                {'error': 'missing_agent_id'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Verify agent exists
+        try:
+            agent = Agent.objects.get(agent_id=agent_id)
+        except Agent.DoesNotExist:
+            return Response(
+                {'error': 'agent_not_found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Create event
+        Event.objects.create(
+            user=agent.user,
+            event_type=event_type,
+            event_data=details
+        )
+
+        # Create incident based on severity
+        severity = 'MEDIUM'
+        if 'bulk_export' in event_type.lower():
+            severity = 'CRITICAL'
+
+        Incident.objects.create(
+            user=agent.user,
+            incident_type=f'Insider Threat: {event_type}',
+            severity=severity
+        )
+
+        return Response({
+            'status': 'ok',
+            'message': 'Insider alert recorded'
         }, status=status.HTTP_200_OK)
 
     except Exception as e:

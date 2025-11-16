@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('whitelist', views.get_whitelist, name='agent_whitelist'),
     path('agent-config', views.get_agent_config, name='agent_config'),
     path('usb-event', views.usb_event, name='agent_usb_event'),
+    path('tamper', views.tamper_alert, name='agent_tamper'),
+    path('insider-alert', views.insider_alert, name='agent_insider_alert'),
 ]
